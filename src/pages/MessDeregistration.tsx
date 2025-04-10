@@ -68,7 +68,7 @@ const MessDeregistration: React.FC = () => {
             {/* Success Message */}
             {submitSuccess && (
               <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-md">
-                <p className="text-green-700">Your deregistration request has been submitted successfully!</p>
+                <p className="text-green-700">Your deregistration request has been submitted successfully! </p>
               </div>
             )}
 
