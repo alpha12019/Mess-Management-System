@@ -1,9 +1,21 @@
 import React, { useState } from 'react';
 
+interface MenuItem {
+  day: string;
+  breakfast: string;
+  lunch: string;
+  dinner: string;
+}
+
+interface MenuData {
+  mess1: MenuItem[];
+  mess2: MenuItem[];
+}
+
 const MessCaretakerMenu: React.FC = () => {
   const [selectedMess, setSelectedMess] = useState<'mess1' | 'mess2'>('mess1');
 
-  const menuData = {
+  const menuData: MenuData = {
     mess1: [
       { day: 'Monday', breakfast: 'potato', lunch: 'tomato', dinner: 'peas' },
       { day: 'Tuesday', breakfast: 'Sprouts, Idli Sambhar, Nariyal Chutney', lunch: 'Aaloo Jeera Sabji, Dal Makhni, Jeera Rice, Chapati, Suji halwa (one time)', dinner: 'Aaloo Jeera Sabji, Dal Makhni, Jeera Rice, Chapati, Suji halwa' },
