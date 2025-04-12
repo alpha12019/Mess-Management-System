@@ -7,7 +7,7 @@ const MessBill: React.FC = () => {
     {
       id: 1,
       month: 'January',
-      year: 2023,
+      year: 2025,
       amount: 3500,
       dueDate: '2023-01-15',
       status: 'Paid',
@@ -16,7 +16,7 @@ const MessBill: React.FC = () => {
     {
       id: 2,
       month: 'February',
-      year: 2023,
+      year: 2025,
       amount: 3500,
       dueDate: '2023-02-15',
       status: 'Pending',
