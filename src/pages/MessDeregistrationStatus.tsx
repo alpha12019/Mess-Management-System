@@ -13,7 +13,7 @@ const MessDeregistrationStatus: React.FC = () => {
     {
       id: 'DRG-2023-001',
       name: 'John Doe',
-      rollNo: 'B21CS001',
+      rollNo: 'B21CS011',
       batch: '2021',
       semester: '5',
       deregistrationRemark: 'Graduating this semester',

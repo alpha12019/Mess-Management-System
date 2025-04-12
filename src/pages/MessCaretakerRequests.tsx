@@ -48,7 +48,7 @@ const MessCaretakerRequests: React.FC = () => {
       transactionNo: '345678',
       image: 'Student',
       amount: 10000,
-      startDate: '2025-01-03',
+      startDate: '2025-01-05',
       paymentDate: '2025-01-01',
       remark: 'NA',
       status: 'pending'
@@ -59,7 +59,7 @@ const MessCaretakerRequests: React.FC = () => {
       transactionNo: '345678',
       image: 'Student',
       amount: 10000,
-      startDate: '2025-01-03',
+      startDate: '2025-01-10',
       paymentDate: '2025-01-01',
       remark: 'NA',
       status: 'pending'
@@ -67,10 +67,10 @@ const MessCaretakerRequests: React.FC = () => {
   ]);
 
   const [deregistrationRequests] = useState<DeregistrationRequest[]>([
-    { studentId: '21BCS067', remark: 'dont want to eat anymore ...', status: 'pending' },
-    { studentId: '21BCS067', remark: 'dfe', status: 'pending' },
-    { studentId: '22BCS183', remark: 'xcvgbhnj', status: 'pending' },
-    { studentId: '22BCS183', remark: 'zsfgh', status: 'pending' }
+    { studentId: '21BCS167', remark: 'dont want to eat anymore ...', status: 'pending' },
+    { studentId: '21BCS267', remark: 'dfe', status: 'pending' },
+    { studentId: '22BCS105', remark: 'xcvgbhnj', status: 'pending' },
+    { studentId: '22BCS180', remark: 'zsfgh', status: 'pending' }
   ]);
 
   const renderContent = () => {
