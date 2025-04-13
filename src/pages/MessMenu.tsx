@@ -8,7 +8,7 @@ const MessMenu: React.FC = () => {
     1: [
       {
         day: 'Monday',
-        breakfast: 'Namkeen Sevaiyan, Black Channa, Banana (2 -Piece)',
+        breakfast: 'Namkeen Sevaiyan, Black Channa, Banana (1 -Piece)',
         lunch: 'Razma Sabji, chana Dal, Plain Rice, Boondi Raita',
         dinner: 'Mix-veg Arhar Dal, Chapati, Veg-Pulao,'
       },
@@ -57,7 +57,7 @@ const MessMenu: React.FC = () => {
         lunch: 'Paneer Butter Masala, Dal Tadka, Jeera Rice, Roti, Raita',
         dinner: 'Veg Korma, Masoor Dal, Pulao, Chapati, Custard'
       },
-      // Add more days for Mess 2
+      // Add more days for Mess 
       {
         day: 'Tuesday',
         breakfast: 'Pav Bhaji, Sprouts Salad',
