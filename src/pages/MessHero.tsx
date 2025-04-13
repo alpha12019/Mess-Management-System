@@ -16,7 +16,7 @@ const MessHero: React.FC = () => {
           <div className="flex flex-wrap gap-4">
             <Link
               to="/mess/registration"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-md transition-colors"
+              className="bg-blue-601 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-md transition-colors"
             >
               Register Now
             </Link>

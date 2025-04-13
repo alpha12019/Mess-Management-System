@@ -70,7 +70,7 @@ const MessFeedback: React.FC = () => {
                 </div>
                 <div className="ml-3">
                   <p className="text-sm text-green-700">
-                    Your feedback has been submitted successfully. Thank you!
+                    Your feedback has been submitted successfully. Thank you!!!
                   </p>
                 </div>
               </div>
