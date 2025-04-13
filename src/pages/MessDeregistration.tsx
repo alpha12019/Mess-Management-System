@@ -92,7 +92,7 @@ const MessDeregistration: React.FC = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  placeholder="Enter your name"
+                  placeholder="Enter your Name"
                   required
                 />
               </div>
@@ -108,7 +108,7 @@ const MessDeregistration: React.FC = () => {
                   value={rollNo}
                   onChange={(e) => setRollNo(e.target.value)}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  placeholder="Enter your roll number"
+                  placeholder="Enter your Roll Number"
                   required
                 />
               </div>
