@@ -34,8 +34,9 @@ import StudentUpdatePayment from './pages/StudentUpdatePayment';
 import StudentDeregistration from './pages/StudentDeregistration';
 
 import CommonDashboard from './pages/CommonDashboard';
+import CommonDashboardSelector from './pages/CommonDashboardSelector';
 
-type ActorType = 'registered_student' | 'unregistered_student' | 'warden' | 'caretaker';
+type ActorType = 'common_dashboard' | 'registered_student' | 'unregistered_student' | 'warden' | 'caretaker';
 
 function App() {
   const [selectedActor, setSelectedActor] = useState<ActorType>('unregistered_student');
@@ -63,6 +64,9 @@ function App() {
       case 'caretaker':
         navigate('/caretaker/view-feedback');
         break;
+      case 'common_dashboard':
+        navigate('/dashboard');
+        break;
     }
   };
 
@@ -80,6 +84,7 @@ function App() {
               onChange={handleActorChange}
               className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
+              <option value="common_dashboard">Common Dashboard</option>
               <option value="registered_student">Registered Student</option>
               <option value="unregistered_student">Unregistered Student</option>
               <option value="warden">Mess Warden</option>
@@ -89,6 +94,9 @@ function App() {
         </div>
 
         <Routes>
+          {/* Common Dashboard Selector */}
+          <Route path="/dashboard" element={<CommonDashboardSelector />} />
+
           {/* Unregistered Student Routes */}
           <Route path="/student" element={<StudentLayout userType="unregistered" />}>
             <Route path="menu" element={<StudentMenu />} />
