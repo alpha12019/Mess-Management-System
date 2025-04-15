@@ -33,6 +33,8 @@ import StudentApplications from './pages/StudentApplications';
 import StudentUpdatePayment from './pages/StudentUpdatePayment';
 import StudentDeregistration from './pages/StudentDeregistration';
 
+import CommonDashboard from './pages/CommonDashboard';
+
 type ActorType = 'registered_student' | 'unregistered_student' | 'warden' | 'caretaker';
 
 function App() {
@@ -92,7 +94,8 @@ function App() {
             <Route path="menu" element={<StudentMenu />} />
             <Route path="bill" element={<StudentBill />} />
             <Route path="registration" element={<StudentRegistration />} />
-            <Route index element={<Navigate to="/student/menu" replace />} />
+            <Route path="dashboard" element={<CommonDashboard userType="student" />} />
+            <Route index element={<Navigate to="/student/dashboard" replace />} />
           </Route>
 
           {/* Registered Student Routes */}
@@ -113,7 +116,8 @@ function App() {
             <Route path="applications" element={<StudentApplications />} />
             <Route path="update-payment" element={<StudentUpdatePayment />} />
             <Route path="deregistration" element={<StudentDeregistration />} />
-            <Route index element={<Navigate to="/student/menu" replace />} />
+            <Route path="dashboard" element={<CommonDashboard userType="student" />} />
+            <Route index element={<Navigate to="/student/dashboard" replace />} />
             <Route path="*" element={<div>Page not found</div>} />
           </Route>
 
@@ -128,12 +132,13 @@ function App() {
               )
             }
           >
-            <Route index element={<MessWardenFeedback />} />
+            <Route index element={<Navigate to="/warden/dashboard" replace />} />
             <Route path="feedback" element={<MessWardenFeedback />} />
             <Route path="menu" element={<MessWardenMenu />} />
             <Route path="announcements" element={<MessWardenAnnouncements />} />
             <Route path="registrations" element={<MessWardenRegistrations />} />
             <Route path="payments" element={<MessWardenPayments />} />
+            <Route path="dashboard" element={<CommonDashboard userType="warden" />} />
             <Route path="*" element={<div>Page not found</div>} />
           </Route>
 
@@ -160,7 +165,8 @@ function App() {
             <Route path="update-menu" element={<UpdateMessMenu />} />
             <Route path="update-dates" element={<UpdateSemesterDates />} />
             <Route path="add-remove-mess" element={<AddOrRemoveFromMess />} />
-            <Route index element={<Navigate to="/caretaker/menu" replace />} />
+            <Route path="dashboard" element={<CommonDashboard userType="caretaker" />} />
+            <Route index element={<Navigate to="/caretaker/dashboard" replace />} />
             <Route path="*" element={<div>Page not found</div>} />
           </Route>
 
