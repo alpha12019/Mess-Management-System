@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 
 const CommonDashboardSelector: React.FC = () => {
@@ -11,6 +11,35 @@ const CommonDashboardSelector: React.FC = () => {
   const [signupRole, setSignupRole] = useState('student');
   const [signupName, setSignupName] = useState('');
   const [signupRollNo, setSignupRollNo] = useState('');
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [windowDimensions, setWindowDimensions] = useState({
+    width: typeof window !== 'undefined' ? window.innerWidth : 0,
+    height: typeof window !== 'undefined' ? window.innerHeight : 0,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: e.clientX,
+        y: e.clientY,
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
 
   const userTypes = [
     { 
@@ -77,7 +106,7 @@ const CommonDashboardSelector: React.FC = () => {
     setSignupRollNo('');
   };
 
-  const getBackgroundStyles = () => {
+  const getBackgroundStyles = (): CSSProperties => {
     if (activeTab === 'login') {
       return {
         backgroundImage: 'url("https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80")',
@@ -92,16 +121,58 @@ const CommonDashboardSelector: React.FC = () => {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       };
+    } else {
+      // Interactive background for dashboard
+      return {
+        position: 'relative' as const,
+        overflow: 'hidden' as const,
+        backgroundColor: '#f0f4f8',
+      };
     }
-    return {};
+  };
+
+  // Calculate the parallax effect for the dashboard particles
+  const getParallaxStyle = (index: number) => {
+    if (activeTab !== 'dashboard') return {};
+    
+    const speed = index % 3 === 0 ? 0.02 : index % 3 === 1 ? 0.03 : 0.015;
+    const xOffset = (mousePosition.x - windowDimensions.width / 2) * speed;
+    const yOffset = (mousePosition.y - windowDimensions.height / 2) * speed;
+    
+    return {
+      transform: `translate(${xOffset}px, ${yOffset}px)`,
+    };
   };
 
   return (
     <div 
-      className="min-h-screen p-4 sm:p-6 lg:p-8"
+      className="min-h-screen p-4 sm:p-6 lg:p-8 relative"
       style={getBackgroundStyles()}
     >
-      <div className={`${activeTab !== 'dashboard' ? 'bg-white/90 backdrop-blur-sm py-8 px-4 sm:px-6 rounded-xl shadow-xl max-w-4xl mx-auto' : ''}`}>
+      {activeTab === 'dashboard' && (
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Interactive background elements */}
+          {Array.from({ length: 15 }).map((_, index) => (
+            <div 
+              key={index}
+              className="absolute rounded-full opacity-70 transition-transform duration-200 ease-out"
+              style={{
+                width: Math.random() * 80 + 30 + 'px',
+                height: Math.random() * 80 + 30 + 'px',
+                left: Math.random() * 100 + '%',
+                top: Math.random() * 100 + '%',
+                backgroundColor: index % 4 === 0 ? '#4299e1' : 
+                                index % 4 === 1 ? '#48bb78' : 
+                                index % 4 === 2 ? '#ecc94b' : '#9f7aea',
+                zIndex: -1,
+                ...getParallaxStyle(index)
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      <div className={`${activeTab !== 'dashboard' ? 'bg-white/90 backdrop-blur-sm py-8 px-4 sm:px-6 rounded-xl shadow-xl max-w-4xl mx-auto' : ''} relative z-10`}>
         <h1 className="text-2xl sm:text-3xl font-semibold mb-6 text-center">Mess Management System</h1>
         
         {/* Navigation Tabs */}
@@ -140,7 +211,11 @@ const CommonDashboardSelector: React.FC = () => {
                 <Link 
                   key={index} 
                   to={type.path}
-                  className={`${type.color} border rounded-lg p-6 transition-all transform hover:scale-105 hover:shadow-md flex flex-col items-center text-center`}
+                  className={`${type.color} border rounded-lg p-6 transition-all transform hover:scale-105 hover:shadow-md flex flex-col items-center text-center backdrop-blur-sm bg-opacity-90`}
+                  style={{
+                    ...getParallaxStyle(index + 5),
+                    transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+                  }}
                 >
                   <span className="text-4xl mb-3">{type.icon}</span>
                   <h2 className="text-xl font-semibold mb-2">{type.title}</h2>
