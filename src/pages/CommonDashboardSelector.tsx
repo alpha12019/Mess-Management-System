@@ -12,10 +12,39 @@ const CommonDashboardSelector: React.FC = () => {
   const [signupName, setSignupName] = useState('');
   const [signupRollNo, setSignupRollNo] = useState('');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [currentPromoIndex, setCurrentPromoIndex] = useState(0);
   const [windowDimensions, setWindowDimensions] = useState({
     width: typeof window !== 'undefined' ? window.innerWidth : 0,
     height: typeof window !== 'undefined' ? window.innerHeight : 0,
   });
+
+  // Promotional content for the carousel
+  const promotions = [
+    {
+      title: "Special Meal This Friday!",
+      description: "Join us for a special South Indian feast this Friday. Pre-register to secure your spot!",
+      image: "https://images.unsplash.com/photo-1505253758473-96b7015fcd40?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      buttonText: "Register Now",
+      bgColor: "bg-yellow-100",
+      textColor: "text-yellow-800"
+    },
+    {
+      title: "New Digital Payment System",
+      description: "Now pay your mess bill online with our new digital payment system. Fast, secure, and convenient!",
+      image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      buttonText: "Learn More",
+      bgColor: "bg-blue-100",
+      textColor: "text-blue-800"
+    },
+    {
+      title: "Feedback Rewards",
+      description: "Submit your feedback about mess food and get a chance to win meal coupons!",
+      image: "https://images.unsplash.com/photo-1594980596870-8aa52a78d8cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      buttonText: "Submit Feedback",
+      bgColor: "bg-green-100",
+      textColor: "text-green-800"
+    }
+  ];
 
   useEffect(() => {
     const handleResize = () => {
@@ -35,11 +64,17 @@ const CommonDashboardSelector: React.FC = () => {
     window.addEventListener('resize', handleResize);
     window.addEventListener('mousemove', handleMouseMove);
 
+    // Rotate through promotions every 5 seconds
+    const promoInterval = setInterval(() => {
+      setCurrentPromoIndex((prevIndex) => (prevIndex + 1) % promotions.length);
+    }, 5000);
+
     return () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
+      clearInterval(promoInterval);
     };
-  }, []);
+  }, [promotions.length]);
 
   const userTypes = [
     { 
@@ -202,6 +237,46 @@ const CommonDashboardSelector: React.FC = () => {
         {/* Dashboard View */}
         {activeTab === 'dashboard' && (
           <>
+            {/* Promotional Carousel Banner */}
+            <div className="mb-10 max-w-6xl mx-auto overflow-hidden rounded-xl shadow-lg">
+              <div className="relative">
+                {promotions.map((promo, index) => (
+                  <div 
+                    key={index}
+                    className={`${promo.bgColor} p-4 sm:p-6 flex flex-col md:flex-row items-center justify-between transition-opacity duration-500 ease-in-out ${index === currentPromoIndex ? 'opacity-100' : 'opacity-0 absolute inset-0'}`}
+                    style={{ zIndex: index === currentPromoIndex ? 1 : 0 }}
+                  >
+                    <div className="md:w-2/3 mb-4 md:mb-0 md:pr-6">
+                      <h3 className={`text-xl font-bold mb-2 ${promo.textColor}`}>{promo.title}</h3>
+                      <p className="text-gray-700">{promo.description}</p>
+                      <button className={`mt-3 px-4 py-2 rounded-md bg-white ${promo.textColor} font-medium border hover:shadow-md transition-shadow`}>
+                        {promo.buttonText}
+                      </button>
+                    </div>
+                    <div className="md:w-1/3 h-32 md:h-40 relative overflow-hidden rounded-lg">
+                      <img
+                        src={promo.image}
+                        alt={promo.title}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                ))}
+
+                {/* Indicator Dots */}
+                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                  {promotions.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentPromoIndex(index)}
+                      className={`w-2 h-2 rounded-full ${index === currentPromoIndex ? 'bg-gray-800' : 'bg-gray-300'}`}
+                      aria-label={`Go to slide ${index + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
             <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
               Select your user type to access the appropriate dashboard and features.
             </p>
@@ -222,6 +297,58 @@ const CommonDashboardSelector: React.FC = () => {
                   <p className="text-sm text-gray-600">{type.description}</p>
                 </Link>
               ))}
+            </div>
+
+            {/* Featured Announcement */}
+            <div className="mt-12 max-w-6xl mx-auto bg-white rounded-lg shadow-md overflow-hidden border border-blue-100">
+              <div className="flex flex-col md:flex-row">
+                <div className="md:w-1/4 bg-blue-500 text-white p-6 flex items-center justify-center">
+                  <h3 className="text-xl font-bold text-center">Featured Announcement</h3>
+                </div>
+                <div className="md:w-3/4 p-6">
+                  <h4 className="text-lg font-semibold mb-2">New Mess Management App Coming Soon!</h4>
+                  <p className="text-gray-600 mb-4">
+                    We're excited to announce that we're developing a mobile app for our mess management system. 
+                    Stay tuned for updates on the release date and features.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Mobile App</span>
+                    <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Coming Soon</span>
+                    <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">New Features</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Small Ads */}
+            <div className="mt-8 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 flex items-center">
+                <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mr-4">
+                  <span className="text-xl">📱</span>
+                </div>
+                <div>
+                  <h4 className="font-medium">Download Our App</h4>
+                  <p className="text-sm text-gray-600">Get mess updates on-the-go</p>
+                </div>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 flex items-center">
+                <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4">
+                  <span className="text-xl">🍲</span>
+                </div>
+                <div>
+                  <h4 className="font-medium">Weekly Menu Updates</h4>
+                  <p className="text-sm text-gray-600">Never miss your favorite meal</p>
+                </div>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 flex items-center">
+                <div className="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center mr-4">
+                  <span className="text-xl">💡</span>
+                </div>
+                <div>
+                  <h4 className="font-medium">Suggest a Meal</h4>
+                  <p className="text-sm text-gray-600">Share your meal ideas with us</p>
+                </div>
+              </div>
             </div>
           </>
         )}
