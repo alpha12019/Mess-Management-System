@@ -1,5 +1,13 @@
-import React, { useState, useEffect, CSSProperties } from 'react';
+import React, { useState, useEffect, CSSProperties, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { 
+  FloatingNotification, 
+  DarkModeToggle, 
+  InteractiveBanner,
+  StatCounters,
+  MessQuiz,
+  NewsTicker
+} from './InteractiveDashboardElements';
 
 const CommonDashboardSelector: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'login' | 'signup'>('dashboard');
@@ -17,6 +25,13 @@ const CommonDashboardSelector: React.FC = () => {
     width: typeof window !== 'undefined' ? window.innerWidth : 0,
     height: typeof window !== 'undefined' ? window.innerHeight : 0,
   });
+  
+  // Interactive elements state
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
+  const [darkMode, setDarkMode] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(-1);
+  const tooltipTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Promotional content for the carousel
   const promotions = [
@@ -46,6 +61,32 @@ const CommonDashboardSelector: React.FC = () => {
     }
   ];
 
+  // Functions for interactive elements
+  const displayNotification = (message: string) => {
+    setNotificationMessage(message);
+    setShowNotification(true);
+    setTimeout(() => {
+      setShowNotification(false);
+    }, 3000);
+  };
+
+  const handleTooltipEnter = (index: number) => {
+    if (tooltipTimeoutRef.current) {
+      clearTimeout(tooltipTimeoutRef.current);
+    }
+    setShowTooltip(index);
+  };
+
+  const handleTooltipLeave = () => {
+    tooltipTimeoutRef.current = setTimeout(() => {
+      setShowTooltip(-1);
+    }, 300);
+  };
+
+  const handleStatClick = (label: string, value: number | string) => {
+    displayNotification(`${label}: ${value}`);
+  };
+
   useEffect(() => {
     const handleResize = () => {
       setWindowDimensions({
@@ -73,6 +114,9 @@ const CommonDashboardSelector: React.FC = () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
       clearInterval(promoInterval);
+      if (tooltipTimeoutRef.current) {
+        clearTimeout(tooltipTimeoutRef.current);
+      }
     };
   }, [promotions.length]);
 
@@ -161,7 +205,7 @@ const CommonDashboardSelector: React.FC = () => {
       return {
         position: 'relative' as const,
         overflow: 'hidden' as const,
-        backgroundColor: '#f0f4f8',
+        backgroundColor: darkMode ? '#121212' : '#f0f4f8',
       };
     }
   };
@@ -179,11 +223,35 @@ const CommonDashboardSelector: React.FC = () => {
     };
   };
 
+  // Add the following after useState declarations at the top
+  const [quizCompleted, setQuizCompleted] = useState(false);
+  const [quizScore, setQuizScore] = useState({ score: 0, total: 0 });
+
+  // Add the following function to handle quiz completion
+  const handleQuizComplete = (score: number, total: number) => {
+    setQuizScore({ score, total });
+    setQuizCompleted(true);
+    displayNotification(`Quiz completed! Score: ${score}/${total}`);
+  };
+
+  // Add news items for the ticker
+  const newsItems = [
+    "New vegetarian options available in Mess 1 starting next week",
+    "Mess timings extended during exam period",
+    "Special holiday menu announced for Independence Day",
+    "Feedback survey now open - share your thoughts for a chance to win prizes",
+    "Maintenance scheduled for Mess 2 kitchen this weekend"
+  ];
+
   return (
     <div 
-      className="min-h-screen p-4 sm:p-6 lg:p-8 relative"
+      className={`min-h-screen p-4 sm:p-6 lg:p-8 relative ${darkMode ? 'bg-gray-900 text-white' : ''}`}
       style={getBackgroundStyles()}
     >
+      {/* Interactive Elements */}
+      <FloatingNotification message={notificationMessage} isVisible={showNotification} />
+      <DarkModeToggle isDarkMode={darkMode} onToggle={() => setDarkMode(!darkMode)} />
+
       {activeTab === 'dashboard' && (
         <div className="absolute inset-0 overflow-hidden">
           {/* Interactive background elements */}
@@ -208,7 +276,9 @@ const CommonDashboardSelector: React.FC = () => {
       )}
 
       <div className={`${activeTab !== 'dashboard' ? 'bg-white/90 backdrop-blur-sm py-8 px-4 sm:px-6 rounded-xl shadow-xl max-w-4xl mx-auto' : ''} relative z-10`}>
-        <h1 className="text-2xl sm:text-3xl font-semibold mb-6 text-center">Mess Management System</h1>
+        <h1 className={`text-2xl sm:text-3xl font-semibold mb-6 text-center ${darkMode && activeTab === 'dashboard' ? 'text-white' : ''}`}>
+          Mess Management System
+        </h1>
         
         {/* Navigation Tabs */}
         <div className="flex justify-center mb-8">
@@ -249,7 +319,10 @@ const CommonDashboardSelector: React.FC = () => {
                     <div className="md:w-2/3 mb-4 md:mb-0 md:pr-6">
                       <h3 className={`text-xl font-bold mb-2 ${promo.textColor}`}>{promo.title}</h3>
                       <p className="text-gray-700">{promo.description}</p>
-                      <button className={`mt-3 px-4 py-2 rounded-md bg-white ${promo.textColor} font-medium border hover:shadow-md transition-shadow`}>
+                      <button 
+                        className={`mt-3 px-4 py-2 rounded-md bg-white ${promo.textColor} font-medium border hover:shadow-md transition-shadow`}
+                        onClick={() => displayNotification(`Action triggered: ${promo.buttonText}`)}
+                      >
                         {promo.buttonText}
                       </button>
                     </div>
@@ -277,7 +350,40 @@ const CommonDashboardSelector: React.FC = () => {
               </div>
             </div>
 
-            <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+            {/* Interactive Promotional Banner */}
+            <InteractiveBanner 
+              onInteract={() => displayNotification("Promo code FIRSTMEAL applied for 10% discount!")} 
+            />
+
+            {/* Interactive Stats Counter */}
+            <StatCounters onStatClick={handleStatClick} />
+
+            {/* News Ticker */}
+            <NewsTicker news={newsItems} />
+
+            {/* Interactive Quiz */}
+            {!quizCompleted && (
+              <MessQuiz onComplete={handleQuizComplete} />
+            )}
+
+            {quizCompleted && (
+              <div className="my-8 max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+                <div className="p-6 text-center">
+                  <h4 className="text-xl font-bold mb-2">Thanks for taking the quiz!</h4>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                    You scored {quizScore.score} out of {quizScore.total}.
+                  </p>
+                  <button
+                    onClick={() => setQuizCompleted(false)}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                  >
+                    Take Another Quiz
+                  </button>
+                </div>
+              </div>
+            )}
+
+            <p className={`text-center ${darkMode ? 'text-gray-300' : 'text-gray-600'} mb-8 max-w-2xl mx-auto`}>
               Select your user type to access the appropriate dashboard and features.
             </p>
             
@@ -286,28 +392,37 @@ const CommonDashboardSelector: React.FC = () => {
                 <Link 
                   key={index} 
                   to={type.path}
-                  className={`${type.color} border rounded-lg p-6 transition-all transform hover:scale-105 hover:shadow-md flex flex-col items-center text-center backdrop-blur-sm bg-opacity-90`}
+                  className={`${darkMode ? 'bg-gray-800 border-gray-700 text-white' : type.color} border rounded-lg p-6 transition-all transform hover:scale-105 hover:shadow-md flex flex-col items-center text-center backdrop-blur-sm bg-opacity-90 relative group`}
                   style={{
                     ...getParallaxStyle(index + 5),
                     transition: 'transform 0.2s ease, box-shadow 0.2s ease'
                   }}
+                  onMouseEnter={() => handleTooltipEnter(index)}
+                  onMouseLeave={handleTooltipLeave}
+                  onClick={() => displayNotification(`Navigating to ${type.title} dashboard`)}
                 >
-                  <span className="text-4xl mb-3">{type.icon}</span>
+                  <span className="text-4xl mb-3 transform group-hover:scale-110 group-hover:rotate-12 transition-transform">{type.icon}</span>
                   <h2 className="text-xl font-semibold mb-2">{type.title}</h2>
-                  <p className="text-sm text-gray-600">{type.description}</p>
+                  <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>{type.description}</p>
+                  {showTooltip === index && (
+                    <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs rounded py-1 px-2 w-48 text-center">
+                      Click to access the {type.title.toLowerCase()} dashboard
+                      <div className="absolute w-3 h-3 bg-black transform rotate-45 left-1/2 -translate-x-1/2 bottom-[-6px]"></div>
+                    </div>
+                  )}
                 </Link>
               ))}
             </div>
 
             {/* Featured Announcement */}
-            <div className="mt-12 max-w-6xl mx-auto bg-white rounded-lg shadow-md overflow-hidden border border-blue-100">
+            <div className={`mt-12 max-w-6xl mx-auto ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-blue-100'} rounded-lg shadow-md overflow-hidden border`}>
               <div className="flex flex-col md:flex-row">
                 <div className="md:w-1/4 bg-blue-500 text-white p-6 flex items-center justify-center">
                   <h3 className="text-xl font-bold text-center">Featured Announcement</h3>
                 </div>
                 <div className="md:w-3/4 p-6">
-                  <h4 className="text-lg font-semibold mb-2">New Mess Management App Coming Soon!</h4>
-                  <p className="text-gray-600 mb-4">
+                  <h4 className={`text-lg font-semibold mb-2 ${darkMode ? 'text-white' : ''}`}>New Mess Management App Coming Soon!</h4>
+                  <p className={`${darkMode ? 'text-gray-300' : 'text-gray-600'} mb-4`}>
                     We're excited to announce that we're developing a mobile app for our mess management system. 
                     Stay tuned for updates on the release date and features.
                   </p>
@@ -322,33 +437,25 @@ const CommonDashboardSelector: React.FC = () => {
 
             {/* Small Ads */}
             <div className="mt-8 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 flex items-center">
-                <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mr-4">
-                  <span className="text-xl">📱</span>
+              {[
+                { title: "Download Our App", desc: "Get mess updates on-the-go", icon: "📱", color: "purple" },
+                { title: "Weekly Menu Updates", desc: "Never miss your favorite meal", icon: "🍲", color: "green" },
+                { title: "Suggest a Meal", desc: "Share your meal ideas with us", icon: "💡", color: "yellow" }
+              ].map((ad, index) => (
+                <div 
+                  key={index}
+                  className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} p-4 rounded-lg shadow-sm border flex items-center cursor-pointer transform hover:scale-102 transition-transform`}
+                  onClick={() => displayNotification(`${ad.title} clicked!`)}
+                >
+                  <div className={`w-12 h-12 rounded-full bg-${ad.color}-100 flex items-center justify-center mr-4`}>
+                    <span className="text-xl">{ad.icon}</span>
+                  </div>
+                  <div>
+                    <h4 className={`font-medium ${darkMode ? 'text-white' : ''}`}>{ad.title}</h4>
+                    <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>{ad.desc}</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-medium">Download Our App</h4>
-                  <p className="text-sm text-gray-600">Get mess updates on-the-go</p>
-                </div>
-              </div>
-              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 flex items-center">
-                <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4">
-                  <span className="text-xl">🍲</span>
-                </div>
-                <div>
-                  <h4 className="font-medium">Weekly Menu Updates</h4>
-                  <p className="text-sm text-gray-600">Never miss your favorite meal</p>
-                </div>
-              </div>
-              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 flex items-center">
-                <div className="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center mr-4">
-                  <span className="text-xl">💡</span>
-                </div>
-                <div>
-                  <h4 className="font-medium">Suggest a Meal</h4>
-                  <p className="text-sm text-gray-600">Share your meal ideas with us</p>
-                </div>
-              </div>
+              ))}
             </div>
           </>
         )}

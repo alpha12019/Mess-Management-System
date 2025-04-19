@@ -84,4 +84,33 @@ code {
   .status-pending {
     @apply bg-yellow-100 text-yellow-800;
   }
+}
+
+/* Custom animation for news ticker */
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+  display: inline-block;
+}
+
+/* Scale animation for hovering over user type cards */
+@keyframes pulse-subtle {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+.hover-animate-pulse:hover {
+  animation: pulse-subtle 2s ease-in-out infinite;
 } 
