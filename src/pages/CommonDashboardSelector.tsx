@@ -282,21 +282,45 @@ const CommonDashboardSelector: React.FC = () => {
         
         {/* Navigation Tabs */}
         <div className="flex justify-center mb-8">
-          <div className="flex space-x-2 bg-gray-100 p-1 rounded-lg">
+          <div className={`flex space-x-2 ${darkMode ? 'bg-gray-700' : 'bg-gray-100'} p-1 rounded-lg`}>
             <button 
-              className={`px-4 py-2 rounded-md ${activeTab === 'dashboard' ? 'bg-white shadow-sm' : ''}`}
+              className={`px-4 py-2 rounded-md ${
+                activeTab === 'dashboard' 
+                  ? darkMode 
+                    ? 'bg-gray-900 text-white shadow-sm' 
+                    : 'bg-white shadow-sm' 
+                  : darkMode 
+                    ? 'text-gray-300 hover:text-white hover:bg-gray-800' 
+                    : 'hover:bg-gray-50'
+              }`}
               onClick={() => setActiveTab('dashboard')}
             >
               Dashboard
             </button>
             <button 
-              className={`px-4 py-2 rounded-md ${activeTab === 'login' ? 'bg-white shadow-sm' : ''}`}
+              className={`px-4 py-2 rounded-md ${
+                activeTab === 'login' 
+                  ? darkMode 
+                    ? 'bg-gray-900 text-white shadow-sm' 
+                    : 'bg-white shadow-sm' 
+                  : darkMode 
+                    ? 'text-gray-300 hover:text-white hover:bg-gray-800' 
+                    : 'hover:bg-gray-50'
+              }`}
               onClick={() => setActiveTab('login')}
             >
               Login
             </button>
             <button 
-              className={`px-4 py-2 rounded-md ${activeTab === 'signup' ? 'bg-white shadow-sm' : ''}`}
+              className={`px-4 py-2 rounded-md ${
+                activeTab === 'signup' 
+                  ? darkMode 
+                    ? 'bg-gray-900 text-white shadow-sm' 
+                    : 'bg-white shadow-sm' 
+                  : darkMode 
+                    ? 'text-gray-300 hover:text-white hover:bg-gray-800' 
+                    : 'hover:bg-gray-50'
+              }`}
               onClick={() => setActiveTab('signup')}
             >
               Signup
