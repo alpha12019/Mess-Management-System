@@ -243,6 +243,13 @@ const CommonDashboardSelector: React.FC = () => {
     "Maintenance scheduled for Mess 2 kitchen this weekend"
   ];
 
+  // After the getBackgroundStyles function, add a new uniform card style function
+  const getCardStyle = () => {
+    return darkMode 
+      ? 'bg-gray-800 border-gray-700 text-white' 
+      : 'bg-white border-gray-200';
+  };
+
   return (
     <div 
       className={`min-h-screen p-4 sm:p-6 lg:p-8 relative ${darkMode ? 'bg-gray-900 text-white' : ''}`}
@@ -275,7 +282,7 @@ const CommonDashboardSelector: React.FC = () => {
         </div>
       )}
 
-      <div className={`${activeTab !== 'dashboard' ? 'bg-white/90 backdrop-blur-sm py-8 px-4 sm:px-6 rounded-xl shadow-xl max-w-4xl mx-auto' : ''} relative z-10`}>
+      <div className={`${activeTab === 'dashboard' ? 'max-w-7xl mx-auto' : ''} relative z-10`}>
         <h1 className={`text-2xl sm:text-3xl font-semibold mb-6 text-center ${darkMode && activeTab === 'dashboard' ? 'text-white' : ''}`}>
           Mess Management System
         </h1>
@@ -332,7 +339,7 @@ const CommonDashboardSelector: React.FC = () => {
         {activeTab === 'dashboard' && (
           <>
             {/* Promotional Carousel Banner */}
-            <div className="mb-10 max-w-6xl mx-auto overflow-hidden rounded-xl shadow-lg">
+            <div className={`mb-10 max-w-6xl mx-auto overflow-hidden rounded-xl shadow-lg ${darkMode ? 'shadow-gray-900/30' : ''}`}>
               <div className="relative">
                 {promotions.map((promo, index) => (
                   <div 
@@ -383,7 +390,16 @@ const CommonDashboardSelector: React.FC = () => {
             <StatCounters onStatClick={handleStatClick} />
 
             {/* News Ticker */}
-            <NewsTicker news={newsItems} />
+            <div className={`${darkMode ? 'bg-gray-900' : 'bg-gray-800'} text-white py-2 overflow-hidden relative`}>
+              <div className="animate-marquee whitespace-nowrap">
+                {newsItems.map((item, index) => (
+                  <span key={index} className="mx-4">• {item}</span>
+                ))}
+                {newsItems.map((item, index) => (
+                  <span key={`repeat-${index}`} className="mx-4">• {item}</span>
+                ))}
+              </div>
+            </div>
 
             {/* Interactive Quiz */}
             {!quizCompleted && (
@@ -391,10 +407,10 @@ const CommonDashboardSelector: React.FC = () => {
             )}
 
             {quizCompleted && (
-              <div className="my-8 max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+              <div className={`my-8 max-w-2xl mx-auto ${getCardStyle()} rounded-xl shadow-md overflow-hidden`}>
                 <div className="p-6 text-center">
                   <h4 className="text-xl font-bold mb-2">Thanks for taking the quiz!</h4>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                  <p className={`${darkMode ? 'text-gray-300' : 'text-gray-600'} mb-4`}>
                     You scored {quizScore.score} out of {quizScore.total}.
                   </p>
                   <button
@@ -416,7 +432,7 @@ const CommonDashboardSelector: React.FC = () => {
                 <Link 
                   key={index} 
                   to={type.path}
-                  className={`${darkMode ? 'bg-gray-800 border-gray-700 text-white' : type.color} border rounded-lg p-6 transition-all transform hover:scale-105 hover:shadow-md flex flex-col items-center text-center backdrop-blur-sm bg-opacity-90 relative group`}
+                  className={`${darkMode ? 'bg-gray-800 border-gray-700 text-white' : type.color} border rounded-lg p-6 transition-all transform hover-animate-pulse hover:shadow-md flex flex-col items-center text-center backdrop-blur-sm bg-opacity-90 relative group`}
                   style={{
                     ...getParallaxStyle(index + 5),
                     transition: 'transform 0.2s ease, box-shadow 0.2s ease'
@@ -429,7 +445,7 @@ const CommonDashboardSelector: React.FC = () => {
                   <h2 className="text-xl font-semibold mb-2">{type.title}</h2>
                   <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>{type.description}</p>
                   {showTooltip === index && (
-                    <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs rounded py-1 px-2 w-48 text-center">
+                    <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs rounded py-1 px-2 w-48 text-center z-10">
                       Click to access the {type.title.toLowerCase()} dashboard
                       <div className="absolute w-3 h-3 bg-black transform rotate-45 left-1/2 -translate-x-1/2 bottom-[-6px]"></div>
                     </div>
@@ -439,7 +455,7 @@ const CommonDashboardSelector: React.FC = () => {
             </div>
 
             {/* Featured Announcement */}
-            <div className={`mt-12 max-w-6xl mx-auto ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-blue-100'} rounded-lg shadow-md overflow-hidden border`}>
+            <div className={`mt-12 max-w-6xl mx-auto ${getCardStyle()} rounded-lg shadow-md overflow-hidden border`}>
               <div className="flex flex-col md:flex-row">
                 <div className="md:w-1/4 bg-blue-500 text-white p-6 flex items-center justify-center">
                   <h3 className="text-xl font-bold text-center">Featured Announcement</h3>
@@ -468,14 +484,14 @@ const CommonDashboardSelector: React.FC = () => {
               ].map((ad, index) => (
                 <div 
                   key={index}
-                  className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} p-4 rounded-lg shadow-sm border flex items-center cursor-pointer transform hover:scale-102 transition-transform`}
+                  className={`${getCardStyle()} p-4 rounded-lg shadow-sm border flex items-center cursor-pointer transform hover:scale-102 transition-transform`}
                   onClick={() => displayNotification(`${ad.title} clicked!`)}
                 >
-                  <div className={`w-12 h-12 rounded-full bg-${ad.color}-100 flex items-center justify-center mr-4`}>
+                  <div className={`w-12 h-12 rounded-full ${darkMode ? 'bg-gray-700' : `bg-${ad.color}-100`} flex items-center justify-center mr-4`}>
                     <span className="text-xl">{ad.icon}</span>
                   </div>
                   <div>
-                    <h4 className={`font-medium ${darkMode ? 'text-white' : ''}`}>{ad.title}</h4>
+                    <h4 className="font-medium">{ad.title}</h4>
                     <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>{ad.desc}</p>
                   </div>
                 </div>
