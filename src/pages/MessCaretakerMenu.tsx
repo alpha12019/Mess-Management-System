@@ -17,7 +17,7 @@ const MessCaretakerMenu: React.FC = () => {
 
   const menuData: MenuData = {
     mess1: [
-      { day: 'Monday', breakfast: 'potatos', lunch: 'tomato', dinner: 'peas' },
+      { day: 'Monday', breakfast: 'potato', lunch: 'tomato', dinner: 'peas' },
       { day: 'Tuesday', breakfast: 'Sprouts, Idli Sambhar, Nariyal Chutney', lunch: 'Aaloo Jeera Sabji, Dal Makhni, Jeera Rice, Chapati, Suji halwa (one time)', dinner: 'Aaloo Jeera Sabji, Dal Makhni, Jeera Rice, Chapati, Suji halwa' },
       { day: 'Wednesday', breakfast: 'Sprouts, Poha jalebi, Namkeen, Chopped Onion, Lemon', lunch: 'Choole-Puri, Arhar Dal, Green-Salad, Plain Rice, Boondi Raita, Chutney', dinner: 'Shimla mirch, Chana Dal, Jeera Rice, Chapati, tamater-chutney' },
       { day: 'Thursday', breakfast: 'N/A', lunch: 'N/A', dinner: 'N/A' },
