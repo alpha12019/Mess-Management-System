@@ -17,7 +17,7 @@ const MessCaretakerSpecialFood: React.FC = () => {
     {
       date: '2024-04-09',
       studentId: '21BCS163',
-      food: 'khichdi',
+      food: 'kheer',
       reason: 'pet kharaab',
       from: '2024-05-01',
       to: '2024-05-10',
