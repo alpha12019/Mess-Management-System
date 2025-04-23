@@ -32,7 +32,7 @@ const MessCaretakerMenu: React.FC = () => {
       { day: 'Thursday', breakfast: 'N/A', lunch: 'N/A', dinner: 'N/A' },
       { day: 'Friday', breakfast: 'Sprouts, Uttapam, Sambhar, Nariyal Chutney, egg', lunch: 'Kala Channa Sabji, Kadhi-Pakoda, Jeera Rice, Chapati', dinner: 'Aaloo beans sabji, Dal makhani, Chapati, Plain Rice' },
       { day: 'Saturday', breakfast: 'Sprouts, Poha jalebi, Namkeen, Chopped Onion', lunch: 'Rice, Daal, Chapati, fries', dinner: 'Chapati, Paneer Masala, Daal, Rice' },
-      { day: 'Sunday', breakfast: 'Sprouts, Poha jalebi, Namkeen, Chopped Onion', lunch: 'Rice, Daal, Chapati, fries, Aalu Gobhi', dinner: 'N/A' }
+      { day: 'Sunday', breakfast: 'Sprouts, Poha jalebi, Namkeen, Chopped Onion', lunch: 'Rice, Daal, Chapati, fries, Aalu Gobhi', dinner: 'Chapati, Paneer Masala, Daal, Rice' }
     ]
   };
 
