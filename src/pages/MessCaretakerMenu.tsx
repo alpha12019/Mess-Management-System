@@ -26,13 +26,13 @@ const MessCaretakerMenu: React.FC = () => {
       { day: 'Sunday', breakfast: 'N/A', lunch: 'N/A', dinner: 'N/A' }
     ],
     mess2: [
-      { day: 'Monday', breakfast: 'potato', lunch: 'tomato', dinner: 'peas' },
+      { day: 'Monday', breakfast: 'potato, egg', lunch: 'tomato', dinner: 'peas' },
       { day: 'Tuesday', breakfast: 'Sprouts, Idli Sambhar, Nariyal Chutney', lunch: 'Aaloo Jeera Sabji, Dal Makhni, Jeera Rice, Chapati, Suji halwa (one time)', dinner: 'Aaloo Jeera Sabji, Dal Makhni, Jeera Rice, Chapati, Suji halwa' },
       { day: 'Wednesday', breakfast: 'Sprouts, Poha jalebi, Namkeen, Chopped Onion, Lemon', lunch: 'Choole-Puri, Arhar Dal, Green-Salad, Plain Rice, Boondi Raita, Chutney', dinner: 'Shimla mirch, Chana Dal, Jeera Rice, Chapati, tamater-chutney' },
       { day: 'Thursday', breakfast: 'N/A', lunch: 'N/A', dinner: 'N/A' },
-      { day: 'Friday', breakfast: 'Sprouts, Uttapam, Sambhar, Nariyal Chutney', lunch: 'Kala Channa Sabji, Kadhi-Pakoda, Jeera Rice, Chapati', dinner: 'Aaloo beans sabji, Dal makhani, Chapati, Plain Rice' },
-      { day: 'Saturday', breakfast: 'N/A', lunch: 'N/A', dinner: 'N/A' },
-      { day: 'Sunday', breakfast: 'N/A', lunch: 'N/A', dinner: 'N/A' }
+      { day: 'Friday', breakfast: 'Sprouts, Uttapam, Sambhar, Nariyal Chutney, egg', lunch: 'Kala Channa Sabji, Kadhi-Pakoda, Jeera Rice, Chapati', dinner: 'Aaloo beans sabji, Dal makhani, Chapati, Plain Rice' },
+      { day: 'Saturday', breakfast: 'Sprouts, Poha jalebi, Namkeen, Chopped Onion', lunch: 'N/A', dinner: 'N/A' },
+      { day: 'Sunday', breakfast: 'Sprouts, Poha jalebi, Namkeen, Chopped Onion', lunch: 'N/A', dinner: 'N/A' }
     ]
   };
 
