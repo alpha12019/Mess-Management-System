@@ -38,37 +38,37 @@ const Dashboard: React.FC = () => {
   // Sample data for stats
   const stats = [
     { 
-      title: 'Revenue', 
-      value: '$54,235.00', 
-      change: '+8.5%', 
+      title: 'Total Revenue', 
+      value: '₹2,45,235', 
+      change: '+12.5%', 
       isPositive: true,
       icon: CurrencyDollarIcon,
       iconBg: 'bg-blue-100',
       iconColor: 'text-primary' 
     },
     { 
-      title: 'Orders', 
-      value: '12,845', 
-      change: '+5.2%', 
+      title: 'Active Students', 
+      value: '1,245', 
+      change: '+8.2%', 
       isPositive: true,
-      icon: ShoppingBagIcon,
+      icon: UsersIcon,
       iconBg: 'bg-green-100',
       iconColor: 'text-green-600' 
     },
     { 
-      title: 'Customers', 
-      value: '38,485', 
-      change: '+12.5%', 
+      title: 'Meals Served', 
+      value: '3,485', 
+      change: '+15.5%', 
       isPositive: true,
-      icon: UsersIcon,
+      icon: ShoppingBagIcon,
       iconBg: 'bg-purple-100',
       iconColor: 'text-purple-600' 
     },
     { 
-      title: 'Completed Tasks', 
-      value: '24/32', 
-      change: '-3.2%', 
-      isPositive: false,
+      title: 'Pending Requests', 
+      value: '12', 
+      change: '-5.2%', 
+      isPositive: true,
       icon: ClipboardDocumentCheckIcon,
       iconBg: 'bg-orange-100',
       iconColor: 'text-orange-600' 
@@ -80,8 +80,8 @@ const Dashboard: React.FC = () => {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     datasets: [
       {
-        label: 'Revenue',
-        data: [18, 25, 20, 30, 28, 35, 40, 45, 43, 50, 52, 58],
+        label: 'Mess Revenue',
+        data: [125000, 135000, 128000, 142000, 138000, 145000, 150000, 155000, 153000, 160000, 162000, 168000],
         borderColor: '#3584F5',
         backgroundColor: 'rgba(53, 132, 245, 0.1)',
         tension: 0.4,
@@ -95,8 +95,8 @@ const Dashboard: React.FC = () => {
     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     datasets: [
       {
-        label: 'Orders',
-        data: [65, 59, 80, 81, 56, 55, 40],
+        label: 'Meals Served',
+        data: [450, 480, 520, 510, 490, 380, 350],
         backgroundColor: '#3584F5',
         borderRadius: 6,
       },
@@ -105,10 +105,10 @@ const Dashboard: React.FC = () => {
 
   // Doughnut chart data
   const customerData = {
-    labels: ['New', 'Returning', 'Inactive'],
+    labels: ['Regular', 'Special Diet', 'Guest'],
     datasets: [
       {
-        data: [42, 38, 20],
+        data: [65, 25, 10],
         backgroundColor: ['#3584F5', '#4CAF50', '#F44336'],
         borderWidth: 0,
       },
@@ -182,8 +182,8 @@ const Dashboard: React.FC = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-dark">Dashboard</h1>
-        <p className="text-gray-500">Welcome back, Ankit! Here's what's happening with your projects today.</p>
+        <h1 className="text-2xl font-bold text-dark">Mess Dashboard</h1>
+        <p className="text-gray-500">Welcome back, Ankit! Here's what's happening with your mess today.</p>
       </div>
       
       {/* Stats Cards */}
@@ -216,7 +216,7 @@ const Dashboard: React.FC = () => {
         {/* Revenue Chart */}
         <div className="card col-span-2">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-lg font-semibold">Revenue Overview</h2>
+            <h2 className="text-lg font-semibold">Monthly Revenue Overview</h2>
             <select className="p-2 border rounded-lg text-sm">
               <option>Last 12 months</option>
               <option>Last 6 months</option>
@@ -230,7 +230,7 @@ const Dashboard: React.FC = () => {
         
         {/* Customer Distribution */}
         <div className="card">
-          <h2 className="text-lg font-semibold mb-6">Customer Distribution</h2>
+          <h2 className="text-lg font-semibold mb-6">Student Distribution</h2>
           <div className="h-80 flex items-center justify-center">
             <Doughnut data={customerData} options={doughnutOptions} />
           </div>
@@ -240,7 +240,7 @@ const Dashboard: React.FC = () => {
       {/* Orders Chart */}
       <div className="card">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-lg font-semibold">Weekly Orders</h2>
+          <h2 className="text-lg font-semibold">Weekly Meal Distribution</h2>
           <select className="p-2 border rounded-lg text-sm">
             <option>Current Week</option>
             <option>Previous Week</option>
