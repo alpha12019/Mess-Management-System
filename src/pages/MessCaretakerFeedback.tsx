@@ -10,7 +10,7 @@ interface Feedback {
 }
 
 interface FeedbackFilter {
-  type: 'Food' | 'Cleanliness ' | 'Maintenance ' | 'Others';
+  type: 'Food' | 'Cleanliness' | 'Maintenance' | 'Others';
 }
 
 const initialFeedbacks: Feedback[] = [
