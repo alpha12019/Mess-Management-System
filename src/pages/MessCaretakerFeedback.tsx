@@ -65,7 +65,15 @@ const MessCaretakerFeedback: React.FC = () => {
   const filteredFeedbacks = feedbacks.filter(feedback => activeFilter.includes(feedback.category as FeedbackFilter['type']));
 
   return (
-    <div className="p-6 min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-100">
+    <div className="p-6 min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-100 relative overflow-hidden">
+      {/* Animated floating circle */}
+      <motion.div
+        initial={{ y: -100, x: 100, opacity: 0.5 }}
+        animate={{ y: [0, 30, 0], x: [0, -30, 0], opacity: [0.5, 0.7, 0.5] }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute top-0 right-0 w-48 h-48 bg-pink-200 rounded-full blur-2xl z-0"
+        style={{ pointerEvents: 'none' }}
+      />
       <h1 className="text-2xl font-semibold text-center text-blue-700 mb-6 drop-shadow-lg">
         View Feedback
       </h1>
