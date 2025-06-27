@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface Feedback {
   date: string;
@@ -71,30 +72,18 @@ const MessCaretakerFeedback: React.FC = () => {
 
       {/* Filter Buttons */}
       <div className="flex flex-wrap gap-4 mb-6">
-        <button
-          onClick={() => handleFilterClick('Food')}
-          className={getFilterButtonClass('Food')}
-        >
-          Food
-        </button>
-        <button
-          onClick={() => handleFilterClick('Cleanliness')}
-          className={getFilterButtonClass('Cleanliness')}
-        >
-          Cleanliness
-        </button>
-        <button
-          onClick={() => handleFilterClick('Maintenance')}
-          className={getFilterButtonClass('Maintenance')}
-        >
-          Maintenance
-        </button>
-        <button
-          onClick={() => handleFilterClick('Others')}
-          className={getFilterButtonClass('Others')}
-        >
-          Others
-        </button>
+        {['Food', 'Cleanliness', 'Maintenance', 'Others'].map((filter) => (
+          <motion.button
+            key={filter}
+            onClick={() => handleFilterClick(filter as FeedbackFilter['type'])}
+            className={getFilterButtonClass(filter as FeedbackFilter['type'])}
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.08 }}
+            transition={{ type: 'spring', stiffness: 300 }}
+          >
+            {filter}
+          </motion.button>
+        ))}
       </div>
 
       {/* Feedback Table */}
@@ -124,39 +113,76 @@ const MessCaretakerFeedback: React.FC = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {filteredFeedbacks.map((feedback) => (
-                <tr key={`${feedback.studentId}-${feedback.date}`}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {feedback.date}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {feedback.studentId}
-                  </td>
-                  <td className="px-6 py-4 text-sm text-gray-500">
-                    {feedback.description}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {feedback.mess}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm">
-                    <span className={`inline-flex rounded-full px-2 text-xs font-semibold ${
-                      feedback.status === 'resolved'
-                        ? 'bg-green-100 text-green-800'
-                        : 'bg-yellow-100 text-yellow-800'
-                    }`}>
-                      {feedback.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    <button
-                      onClick={() => handleStatusChange(feedback.studentId)}
-                      className="text-blue-600 hover:text-blue-900"
-                    >
-                      {feedback.status === 'pending' ? 'Mark as Resolved' : 'Mark as Pending'}
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              <AnimatePresence>
+                {filteredFeedbacks.length === 0 && (
+                  <motion.tr
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                  >
+                    <td colSpan={6} className="py-10 text-center text-gray-400">
+                      <motion.div
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <svg width="60" height="60" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="mx-auto mb-2 text-blue-300 animate-bounce">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6 1a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        No feedbacks found for selected filter.
+                      </motion.div>
+                    </td>
+                  </motion.tr>
+                )}
+                {filteredFeedbacks.map((feedback) => (
+                  <motion.tr
+                    key={`${feedback.studentId}-${feedback.date}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                    whileHover={{ scale: 1.01, backgroundColor: '#f0f8ff' }}
+                  >
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      {feedback.date}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      {feedback.studentId}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-500">
+                      {feedback.description}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {feedback.mess}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm">
+                      <motion.span
+                        key={feedback.status}
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.2 }}
+                        className={`inline-flex rounded-full px-2 text-xs font-semibold ${
+                          feedback.status === 'resolved'
+                            ? 'bg-green-100 text-green-800'
+                            : 'bg-yellow-100 text-yellow-800'
+                        }`}
+                      >
+                        {feedback.status}
+                      </motion.span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <motion.button
+                        whileTap={{ scale: 0.95 }}
+                        whileHover={{ scale: 1.1 }}
+                        onClick={() => handleStatusChange(feedback.studentId)}
+                        className="text-blue-600 hover:text-blue-900"
+                      >
+                        {feedback.status === 'pending' ? 'Mark as Resolved' : 'Mark as Pending'}
+                      </motion.button>
+                    </td>
+                  </motion.tr>
+                ))}
+              </AnimatePresence>
             </tbody>
           </table>
         </div>
