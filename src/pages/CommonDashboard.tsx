@@ -103,7 +103,7 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
       <h1 className="text-2xl sm:text-3xl font-semibold mb-6 text-gray-800">{getWelcomeTitle()}</h1>
       
       {/* Summary Section */}
-      <div className="mb-8">
+      <div className="mb-9">
         <h2 className="text-lg font-medium mb-4 text-gray-700">Summary</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {summaryData.map((item, index) => (
