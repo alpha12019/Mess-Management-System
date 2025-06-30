@@ -13,7 +13,7 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
     switch (userType) {
       case 'student':
         return [
-          { title: 'View Menu', path: '/student/menu', icon: '🍽️' },
+          { title: 'View Menu ', path: '/student/menu', icon: '🍽️' },
           { title: 'View Bill', path: '/student/view-bill', icon: '💰' },
           { title: 'Submit Feedback', path: '/student/feedback', icon: '📝' },
           { title: 'Apply Rebate', path: '/student/applications', icon: '🗓️' }
