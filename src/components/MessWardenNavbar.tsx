@@ -14,13 +14,13 @@ const MessWardenNavbar: React.FC = () => {
   ];
 
   return (
-    <nav className="bg-white shadow">
+    <nav className="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 shadow-lg rounded-b-2xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
             {/* Logo/Home */}
             <div className="flex-shrink-0 flex items-center">
-              <NavLink to="/mess/warden" className="text-xl font-bold text-gray-800">
+              <NavLink to="/mess/warden" className="text-2xl font-extrabold text-blue-700 tracking-wider font-sans drop-shadow-sm">
                 Mess Management
               </NavLink>
             </div>
@@ -32,10 +32,10 @@ const MessWardenNavbar: React.FC = () => {
                   key={item.path}
                   to={item.path}
                   className={({ isActive }) =>
-                    `inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
+                    `inline-flex items-center px-2 pt-1 border-b-4 text-lg font-sans font-semibold transition-all duration-200 ${
                       isActive
-                        ? 'border-blue-500 text-gray-900'
-                        : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                        ? 'border-blue-500 text-blue-700 font-bold scale-105 bg-white/60 rounded-t-lg shadow-sm'
+                        : 'border-transparent text-gray-500 hover:border-purple-300 hover:text-purple-700 hover:scale-105'
                     }`
                   }
                 >
@@ -48,7 +48,7 @@ const MessWardenNavbar: React.FC = () => {
           {/* Right side - Notifications & Profile */}
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
             {/* Notifications */}
-            <button className="p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+            <button className="p-1 rounded-full text-gray-400 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
               <span className="sr-only">View notifications</span>
               <svg
                 className="h-6 w-6"
@@ -69,10 +69,10 @@ const MessWardenNavbar: React.FC = () => {
             {/* Profile dropdown */}
             <div className="ml-3 relative">
               <div>
-                <button className="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <button className="bg-gradient-to-tr from-blue-400 via-purple-400 to-pink-400 rounded-full flex text-base focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-md">
                   <span className="sr-only">Open user menu</span>
-                  <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
-                    <span className="text-sm font-medium text-gray-600">MW</span>
+                  <div className="h-9 w-9 rounded-full flex items-center justify-center text-white font-bold text-lg font-sans">
+                    <span className="text-base font-bold">MW</span>
                   </div>
                 </button>
               </div>
@@ -135,10 +135,10 @@ const MessWardenNavbar: React.FC = () => {
               key={item.path}
               to={item.path}
               className={({ isActive }) =>
-                `block pl-3 pr-4 py-2 border-l-4 text-base font-medium ${
+                `block pl-3 pr-4 py-2 border-l-4 text-lg font-sans font-semibold transition-all duration-200 ${
                   isActive
-                    ? 'bg-blue-50 border-blue-500 text-blue-700'
-                    : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'
+                    ? 'bg-blue-50 border-blue-500 text-blue-700 font-bold scale-105'
+                    : 'border-transparent text-gray-500 hover:bg-purple-50 hover:border-purple-300 hover:text-purple-700 hover:scale-105'
                 }`
               }
               onClick={() => setIsMobileMenuOpen(false)}
