@@ -99,48 +99,55 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
   const summaryData = getSummaryData();
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8">
-      <h1 className="text-2xl sm:text-3xl font-semibold mb-6 text-gray-800">{getWelcomeTitle()}</h1>
-      
+    <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+      <h1 className="text-3xl sm:text-4xl font-extrabold mb-8 text-gray-900 tracking-tight drop-shadow-lg font-sans">
+        {getWelcomeTitle()}
+      </h1>
       {/* Summary Section */}
-      <div className="mb-9">
-        <h2 className="text-lg font-medium mb-4 text-gray-700">Summary</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="mb-12">
+        <h2 className="text-xl font-semibold mb-5 text-purple-700 tracking-wide uppercase font-sans">Summary</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {summaryData.map((item, index) => (
-            <div key={index} className={`${item.color} p-4 rounded-lg shadow-sm`}>
-              <p className="text-sm font-medium text-gray-600">{item.title}</p>
-              <p className="text-2xl font-bold text-gray-800">{item.value}</p>
+            <div
+              key={index}
+              className={`relative overflow-hidden ${item.color} p-6 rounded-2xl shadow-lg border border-gray-100 hover:scale-105 transition-transform duration-300 group`}
+            >
+              <div className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-tr from-purple-200 via-pink-200 to-blue-200 rounded-full opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+              <p className="text-xs font-semibold text-gray-500 tracking-wider uppercase mb-1">{item.title}</p>
+              <p className="text-3xl font-extrabold text-gray-900 font-mono">{item.value}</p>
             </div>
           ))}
         </div>
       </div>
-      
       {/* Quick Links */}
-      <div className="mb-8">
-        <h2 className="text-lg font-medium mb-4 text-gray-700">Quick Links</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="mb-12">
+        <h2 className="text-xl font-semibold mb-5 text-blue-700 tracking-wide uppercase font-sans">Quick Links</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {quickLinks.map((link, index) => (
-            <Link 
-              key={index} 
+            <Link
+              key={index}
               to={link.path}
-              className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition-colors flex items-center"
+              className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:bg-gradient-to-tr hover:from-blue-50 hover:to-purple-100 transition-all flex items-center group hover:scale-105"
             >
-              <span className="text-2xl mr-3">{link.icon}</span>
-              <span className="text-gray-800 font-medium">{link.title}</span>
+              <span className="text-3xl mr-4 transition-transform duration-300 group-hover:scale-125 group-hover:rotate-6">
+                {link.icon}
+              </span>
+              <span className="text-gray-900 font-semibold text-lg tracking-tight font-sans">
+                {link.title}
+              </span>
             </Link>
           ))}
         </div>
       </div>
-      
       {/* Recent Activity (Placeholder) */}
       <div>
-        <h2 className="text-lg font-medium mb-4 text-gray-700">Recent Activity</h2>
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
-          <div className="space-y-3">
+        <h2 className="text-xl font-semibold mb-5 text-pink-700 tracking-wide uppercase font-sans">Recent Activity</h2>
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+          <div className="space-y-4">
             {[1, 2, 3].map((item) => (
-              <div key={item} className="flex items-center py-2 border-b border-gray-100">
-                <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-3">
-                  <span className="text-gray-500">
+              <div key={item} className="flex items-center py-3 border-b border-gray-100 last:border-b-0">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-100 via-purple-100 to-pink-100 flex items-center justify-center mr-4 animate-pulse-slow">
+                  <span className="text-2xl">
                     {userType === 'student' && '📚'}
                     {userType === 'caretaker' && '🍽️'}
                     {userType === 'warden' && '📊'}
@@ -148,13 +155,13 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
                   </span>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-800">
+                  <p className="text-base font-semibold text-gray-900 font-sans">
                     {userType === 'student' && 'Rebate request processed'}
                     {userType === 'caretaker' && 'Menu updated for next week'}
                     {userType === 'warden' && 'New feedback received'}
                     {userType === 'unregistered' && 'Registration open'}
                   </p>
-                  <p className="text-xs text-gray-500">Today at 2:30 PM</p>
+                  <p className="text-xs text-gray-500 mt-1 font-mono">Today at 2:30 PM</p>
                 </div>
               </div>
             ))}
