@@ -10,7 +10,7 @@ const MessNavbar: React.FC<MessNavbarProps> = ({ isRegistered = false }) => {
 
   const unregisteredNavItems = [
     { name: 'View Menu', path: '/mess/menu' },
-    { name: 'View Bill', path: '/mess/bill ' },
+    { name: 'View Bill', path: '/mess/bill' },
     { name: 'Registration', path: '/mess/registration' },
     { name: 'Payment History', path: '/mess/payment-history' },
   ];
