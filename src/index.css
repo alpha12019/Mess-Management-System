@@ -113,4 +113,17 @@ code {
 
 .hover-animate-pulse:hover {
   animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+/* Custom animation for animated gradient bar and glowing avatar in navbars */
+@keyframes gradient-x {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.animate-gradient-x {
+  background-size: 200% 100%;
+  animation: gradient-x 3s linear infinite;
+}
+.animate-glow {
+  box-shadow: 0 0 8px 2px #f472b6, 0 0 16px 4px #a78bfa;
 } 
