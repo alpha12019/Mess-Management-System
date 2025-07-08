@@ -69,6 +69,7 @@ const MessNavbar: React.FC<MessNavbarProps> = ({ isRegistered = false }) => {
                 <NavLink 
                   key={item.name}
                   to={item.path}
+                  title={item.name}
                   className={({ isActive }) => 
                     (isActive || (item.name === 'Applications' && isApplicationsActive) || (item.name === 'Update Balance' && isUpdateBalanceActive))
                       ? "relative border-b-4 border-blue-500 text-blue-700 font-bold inline-flex items-center px-2 pt-1 text-base font-sans scale-105 transition-all duration-200 group"
@@ -109,6 +110,7 @@ const MessNavbar: React.FC<MessNavbarProps> = ({ isRegistered = false }) => {
               <NavLink 
                 key={item.name}
                 to={item.path}
+                title={item.name}
                 className={({ isActive }) => 
                   (isActive || (item.name === 'Applications' && isApplicationsActive) || (item.name === 'Update Balance' && isUpdateBalanceActive))
                     ? "relative bg-blue-100 text-blue-700 block px-3 py-2 rounded-md text-lg font-bold font-sans shadow-sm scale-105 group"
