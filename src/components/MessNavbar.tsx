@@ -4,9 +4,10 @@ import { FaHome, FaRegCommentDots, FaMoneyBillWave, FaWallet, FaCalendarAlt, FaU
 
 interface MessNavbarProps {
   isRegistered?: boolean;
+  userName?: string;
 }
 
-const MessNavbar: React.FC<MessNavbarProps> = ({ isRegistered = false }) => {
+const MessNavbar: React.FC<MessNavbarProps> = ({ isRegistered = false, userName = 'John Doe' }) => {
   const location = useLocation();
 
   const unregisteredNavItems = [
@@ -24,7 +25,7 @@ const MessNavbar: React.FC<MessNavbarProps> = ({ isRegistered = false }) => {
     { name: 'Rebate', path: '/mess/rebate' },
     { name: 'Special Food', path: '/mess/special-food' },
     { name: 'Update Balance', path: '/mess/update-balance' },
-    { name: 'Deregistration', path: '/mess/deregistration' }
+    { name: 'Deregistration', path: '/mess/deregistration' },
   ];
 
   const navItems = isRegistered ? registeredNavItems : unregisteredNavItems;
@@ -89,11 +90,11 @@ const MessNavbar: React.FC<MessNavbarProps> = ({ isRegistered = false }) => {
               <div className="flex items-center">
                 <div className="ml-3 relative">
                   <div className="flex items-center space-x-3">
-                    <span className="text-base text-gray-700 font-semibold font-sans">John Doe</span>
+                    <span className="text-base text-gray-700 font-semibold font-sans">{userName}</span>
                     <button className="bg-gradient-to-tr from-blue-400 via-purple-400 to-pink-400 rounded-full flex text-base focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-md border-4 border-pink-200 hover:scale-110 transition-transform duration-200 animate-glow">
                       <span className="sr-only">Open user menu</span>
                       <div className="h-9 w-9 rounded-full flex items-center justify-center text-white font-bold text-lg font-sans">
-                        JD
+                        {userName.split(' ').map(n => n[0]).join('').toUpperCase()}
                       </div>
                     </button>
                   </div>
