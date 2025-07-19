@@ -53,7 +53,7 @@ const MessNavbar: React.FC<MessNavbarProps> = ({ isRegistered = false, userName 
   };
 
   return (
-    <div className="relative z-10">
+    <div className="relative z-10 animate-fade-in">
       {/* Animated Gradient Accent Bar */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 animate-gradient-x rounded-t-2xl" style={{backgroundSize:'200% 100%'}}></div>
       <div className="backdrop-blur-md bg-white/70 shadow-2xl rounded-b-2xl mb-6 border border-white/40 relative overflow-hidden">
@@ -73,8 +73,8 @@ const MessNavbar: React.FC<MessNavbarProps> = ({ isRegistered = false, userName 
                   title={item.name}
                   className={({ isActive }) => 
                     (isActive || (item.name === 'Applications' && isApplicationsActive) || (item.name === 'Update Balance' && isUpdateBalanceActive))
-                      ? "relative border-b-4 border-blue-500 text-blue-700 font-bold inline-flex items-center px-2 pt-1 text-base font-sans scale-105 transition-all duration-200 group"
-                      : "relative border-b-4 border-transparent text-gray-500 hover:border-purple-300 hover:text-purple-700 inline-flex items-center px-2 pt-1 text-base font-sans font-semibold transition-all duration-200 hover:scale-105 group"
+                      ? "relative border-b-4 border-blue-500 text-blue-700 font-bold inline-flex items-center px-2 pt-1 text-base font-sans scale-105 transition-all duration-200 group nav-animated"
+                      : "relative border-b-4 border-transparent text-gray-500 hover:border-purple-300 hover:text-purple-700 inline-flex items-center px-2 pt-1 text-base font-sans font-semibold transition-all duration-200 hover:scale-110 group nav-animated"
                   }
                 >
                   {navIcons[item.name]}
@@ -91,7 +91,7 @@ const MessNavbar: React.FC<MessNavbarProps> = ({ isRegistered = false, userName 
                 <div className="ml-3 relative">
                   <div className="flex items-center space-x-3">
                     <span className="text-base text-gray-700 font-semibold font-sans">{userName}</span>
-                    <button className="bg-gradient-to-tr from-blue-400 via-purple-400 to-pink-400 rounded-full flex text-base focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-md border-4 border-pink-200 hover:scale-110 transition-transform duration-200 animate-glow">
+                    <button className="bg-gradient-to-tr from-blue-400 via-purple-400 to-pink-400 rounded-full flex text-base focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-md border-4 border-pink-200 hover:scale-110 transition-transform duration-200 animate-glow pulse-avatar">
                       <span className="sr-only">Open user menu</span>
                       <div className="h-9 w-9 rounded-full flex items-center justify-center text-white font-bold text-lg font-sans">
                         {userName.split(' ').map(n => n[0]).join('').toUpperCase()}
@@ -114,8 +114,8 @@ const MessNavbar: React.FC<MessNavbarProps> = ({ isRegistered = false, userName 
                 title={item.name}
                 className={({ isActive }) => 
                   (isActive || (item.name === 'Applications' && isApplicationsActive) || (item.name === 'Update Balance' && isUpdateBalanceActive))
-                    ? "relative bg-blue-100 text-blue-700 block px-3 py-2 rounded-md text-lg font-bold font-sans shadow-sm scale-105 group"
-                    : "relative text-gray-600 hover:bg-purple-50 hover:text-purple-700 block px-3 py-2 rounded-md text-lg font-semibold font-sans transition-all duration-200 hover:scale-105 group"
+                    ? "relative bg-blue-100 text-blue-700 block px-3 py-2 rounded-md text-lg font-bold font-sans shadow-sm scale-105 group nav-animated"
+                    : "relative text-gray-600 hover:bg-purple-50 hover:text-purple-700 block px-3 py-2 rounded-md text-lg font-semibold font-sans transition-all duration-200 hover:scale-110 group nav-animated"
                 }
               >
                 {navIcons[item.name]}
