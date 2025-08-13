@@ -100,70 +100,95 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
   const summaryData = getSummaryData();
 
   return (
-    <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
-      <h1 className="text-3xl sm:text-4xl font-extrabold mb-8 text-gray-900 tracking-tight drop-shadow-lg font-sans">
-        {getWelcomeTitle()}
-      </h1>
+    <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 animate-fade-in">
+      {/* Hero Section with animated background */}
+      <div className="relative mb-12 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-10 rounded-3xl"></div>
+        <div className="relative p-8 text-center">
+          <h1 className="text-4xl sm:text-6xl font-black mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent tracking-tight drop-shadow-lg font-sans animate-pulse">
+            {getWelcomeTitle()}
+          </h1>
+          <p className="text-lg sm:text-xl text-gray-600 font-medium max-w-2xl mx-auto">
+            Welcome to your personalized mess management dashboard. Everything you need, right at your fingertips.
+          </p>
+        </div>
+      </div>
+
       {/* Summary Section */}
       <div className="mb-12">
-        <h2 className="text-xl font-semibold mb-5 text-purple-700 tracking-wide uppercase font-sans">Summary</h2>
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 tracking-wide font-sans flex items-center">
+          <FaChartLine className="mr-3 text-purple-600" />
+          Dashboard Overview
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {summaryData.map((item, index) => (
             <div
               key={index}
-              className={`relative overflow-hidden ${item.color} p-6 rounded-2xl shadow-lg border border-gray-100 hover:scale-105 transition-transform duration-300 group`}
+              className="relative overflow-hidden bg-white p-6 rounded-2xl shadow-xl border border-gray-100 hover:scale-105 transition-all duration-500 group cursor-pointer"
             >
-              <div className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-tr from-purple-200 via-pink-200 to-blue-200 rounded-full opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
-              <p className="text-xs font-semibold text-gray-500 tracking-wider uppercase mb-1">{item.title}</p>
-              <p className="text-3xl font-extrabold text-gray-900 font-mono">{item.value}</p>
+              <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-tr from-purple-200 via-pink-200 to-blue-200 rounded-full opacity-30 group-hover:opacity-60 transition-all duration-500 group-hover:scale-110"></div>
+              <div className="relative z-10">
+                <p className="text-sm font-semibold text-gray-500 tracking-wider uppercase mb-2">{item.title}</p>
+                <p className="text-3xl font-black text-gray-900 font-mono group-hover:text-purple-600 transition-colors duration-300">{item.value}</p>
+              </div>
             </div>
           ))}
         </div>
       </div>
+
       {/* Quick Links */}
       <div className="mb-12">
-        <h2 className="text-xl font-semibold mb-5 text-blue-700 tracking-wide uppercase font-sans">Quick Links</h2>
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 tracking-wide font-sans flex items-center">
+          <FaClipboardList className="mr-3 text-blue-600" />
+          Quick Actions
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {quickLinks.map((link, index) => (
             <Link
               key={index}
               to={link.path}
-              className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:bg-gradient-to-tr hover:from-blue-50 hover:to-purple-100 transition-all flex items-center group hover:scale-105"
+              className="group relative bg-white p-6 rounded-2xl shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-500 hover:scale-105 overflow-hidden"
             >
-              <span className="text-3xl mr-4 transition-transform duration-300 group-hover:scale-125 group-hover:rotate-6">
-                {link.icon}
-              </span>
-              <span className="text-gray-900 font-semibold text-lg tracking-tight font-sans">
-                {link.title}
-              </span>
+              <div className={`absolute inset-0 bg-gradient-to-br ${link.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+              <div className="relative z-10 flex items-center">
+                <div className={`p-3 rounded-xl bg-gradient-to-br ${link.color} text-white mr-4 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}>
+                  <link.icon className="w-6 h-6" />
+                </div>
+                <span className="text-gray-900 font-bold text-lg tracking-tight font-sans group-hover:text-purple-600 transition-colors duration-300">
+                  {link.title}
+                </span>
+              </div>
             </Link>
           ))}
         </div>
       </div>
-      {/* Recent Activity (Placeholder) */}
+
+      {/* Recent Activity */}
       <div>
-        <h2 className="text-xl font-semibold mb-5 text-pink-700 tracking-wide uppercase font-sans">Recent Activity</h2>
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 tracking-wide font-sans flex items-center">
+          <FaRegCalendarCheck className="mr-3 text-pink-600" />
+          Recent Activity
+        </h2>
+        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
           <div className="space-y-4">
             {[1, 2, 3].map((item) => (
-              <div key={item} className="flex items-center py-3 border-b border-gray-100 last:border-b-0">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-100 via-purple-100 to-pink-100 flex items-center justify-center mr-4 animate-pulse-slow">
-                  <span className="text-2xl">
-                    {userType === 'student' && '📚'}
-                    {userType === 'caretaker' && '🍽️'}
-                    {userType === 'warden' && '📊'}
-                    {userType === 'unregistered' && '📝'}
-                  </span>
+              <div key={item} className="flex items-center py-4 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 rounded-lg px-3 transition-colors duration-200">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-100 via-purple-100 to-pink-100 flex items-center justify-center mr-4 animate-pulse">
+                  {userType === 'student' && <FaRegCalendarCheck className="text-blue-600 text-xl" />}
+                  {userType === 'caretaker' && <FaUtensils className="text-green-600 text-xl" />}
+                  {userType === 'warden' && <FaChartLine className="text-purple-600 text-xl" />}
+                  {userType === 'unregistered' && <FaFileAlt className="text-pink-600 text-xl" />}
                 </div>
-                <div>
+                <div className="flex-1">
                   <p className="text-base font-semibold text-gray-900 font-sans">
-                    {userType === 'student' && 'Rebate request processed'}
+                    {userType === 'student' && 'Rebate request processed successfully'}
                     {userType === 'caretaker' && 'Menu updated for next week'}
-                    {userType === 'warden' && 'New feedback received'}
-                    {userType === 'unregistered' && 'Registration open'}
+                    {userType === 'warden' && 'New feedback received from student'}
+                    {userType === 'unregistered' && 'Registration portal is now open'}
                   </p>
-                  <p className="text-xs text-gray-500 mt-1 font-mono">Today at 2:30 PM</p>
+                  <p className="text-sm text-gray-500 mt-1 font-mono">Today at 2:30 PM</p>
                 </div>
+                <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
               </div>
             ))}
           </div>
