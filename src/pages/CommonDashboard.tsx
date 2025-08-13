@@ -109,16 +109,69 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
 
   return (
     <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 animate-fade-in">
+      {/* Top Bar with Search, Time, and Notifications */}
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-8 bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/40">
+        <div className="flex items-center space-x-4 mb-4 sm:mb-0">
+          <div className="relative">
+            <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search dashboard..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent w-64"
+            />
+          </div>
+        </div>
+        <div className="flex items-center space-x-6">
+          <div className="text-center">
+            <div className="text-sm text-gray-500 font-medium">Current Time</div>
+            <div className="text-lg font-bold text-gray-800 font-mono">
+              {currentTime.toLocaleTimeString()}
+            </div>
+          </div>
+          <div className="text-center">
+            <div className="text-sm text-gray-500 font-medium">Date</div>
+            <div className="text-lg font-bold text-gray-800 font-mono">
+              {currentTime.toLocaleDateString()}
+            </div>
+          </div>
+          <button className="relative p-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full hover:scale-110 transition-transform duration-200">
+            <FaBell className="w-5 h-5" />
+            {notifications > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
+                {notifications}
+              </span>
+            )}
+          </button>
+        </div>
+      </div>
+
       {/* Hero Section with animated background */}
       <div className="relative mb-12 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-10 rounded-3xl"></div>
         <div className="relative p-8 text-center">
+          <div className="flex justify-center mb-4">
+            <div className="p-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full animate-bounce">
+              <FaLightbulb className="text-white text-4xl" />
+            </div>
+          </div>
           <h1 className="text-4xl sm:text-6xl font-black mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent tracking-tight drop-shadow-lg font-sans animate-pulse">
             {getWelcomeTitle()}
           </h1>
-          <p className="text-lg sm:text-xl text-gray-600 font-medium max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-600 font-medium max-w-2xl mx-auto mb-6">
             Welcome to your personalized mess management dashboard. Everything you need, right at your fingertips.
           </p>
+          <div className="flex justify-center space-x-4">
+            <div className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full">
+              <FaShieldAlt className="text-green-500" />
+              <span className="text-sm font-medium text-gray-700">Secure & Reliable</span>
+            </div>
+            <div className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full">
+              <FaRocket className="text-blue-500" />
+              <span className="text-sm font-medium text-gray-700">Fast & Efficient</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -172,7 +225,7 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
       </div>
 
       {/* Recent Activity */}
-      <div>
+      <div className="mb-12">
         <h2 className="text-2xl font-bold mb-6 text-gray-800 tracking-wide font-sans flex items-center">
           <FaRegCalendarCheck className="mr-3 text-pink-600" />
           Recent Activity
@@ -199,6 +252,82 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
                 <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Achievements & Stats Section */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 tracking-wide font-sans flex items-center">
+          <FaTrophy className="mr-3 text-yellow-600" />
+          Achievements & Insights
+        </h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Achievement Cards */}
+          <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl shadow-xl border border-yellow-100 p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-bold text-yellow-800">Your Progress</h3>
+              <FaStar className="text-yellow-500 text-2xl animate-pulse" />
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-gray-700">Profile Completion</span>
+                <div className="flex items-center space-x-2">
+                  <div className="w-24 bg-gray-200 rounded-full h-2">
+                    <div className="bg-gradient-to-r from-yellow-400 to-orange-500 h-2 rounded-full w-4/5"></div>
+                  </div>
+                  <span className="text-sm font-bold text-gray-800">80%</span>
+                </div>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-700">Active Days</span>
+                <span className="text-lg font-bold text-yellow-600">15 days</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-700">Tasks Completed</span>
+                <span className="text-lg font-bold text-green-600">24/30</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Tips */}
+          <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl shadow-xl border border-blue-100 p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-bold text-blue-800">Pro Tips</h3>
+              <FaLightbulb className="text-blue-500 text-2xl" />
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-start space-x-3">
+                <div className="w-2 h-2 bg-blue-400 rounded-full mt-2"></div>
+                <p className="text-gray-700 text-sm">Submit feedback early for better response time</p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <div className="w-2 h-2 bg-blue-400 rounded-full mt-2"></div>
+                <p className="text-gray-700 text-sm">Check menu updates daily for special meals</p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <div className="w-2 h-2 bg-blue-400 rounded-full mt-2"></div>
+                <p className="text-gray-700 text-sm">Keep track of your payment deadlines</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer with Quick Actions */}
+      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/40">
+        <div className="flex flex-col sm:flex-row justify-between items-center">
+          <div className="text-center sm:text-left mb-4 sm:mb-0">
+            <p className="text-gray-600 font-medium">Need help? Contact support</p>
+            <p className="text-sm text-gray-500">We're here to help you 24/7</p>
+          </div>
+          <div className="flex space-x-4">
+            <button className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:scale-105 transition-transform duration-200 font-medium">
+              Get Help
+            </button>
+            <button className="px-6 py-2 border border-purple-500 text-purple-600 rounded-lg hover:bg-purple-50 transition-colors duration-200 font-medium">
+              Feedback
+            </button>
           </div>
         </div>
       </div>
