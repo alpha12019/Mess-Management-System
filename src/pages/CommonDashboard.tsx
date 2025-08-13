@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { FaChartLine, FaUsers, FaClipboardList, FaCalendarAlt, FaMoneyBillWave, FaUtensils, FaRegCommentDots, FaFileAlt, FaUserPlus, FaUserEdit, FaUserMinus, FaRegCalendarCheck } from 'react-icons/fa';
 
 interface DashboardProps {
   userType: 'student' | 'caretaker' | 'warden' | 'unregistered';
@@ -13,30 +14,30 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
     switch (userType) {
       case 'student':
         return [
-          { title: 'View Menu ', path: '/student/menu', icon: '🍽️' },
-          { title: 'View Bill', path: '/student/view-bill', icon: '💰' },
-          { title: 'Submit Feedback', path: '/student/feedback', icon: '📝' },
-          { title: 'Apply Rebate', path: '/student/applications', icon: '🗓️' }
+          { title: 'View Menu', path: '/student/menu', icon: FaUtensils, color: 'from-orange-400 to-red-500' },
+          { title: 'View Bill', path: '/student/view-bill', icon: FaMoneyBillWave, color: 'from-green-400 to-blue-500' },
+          { title: 'Submit Feedback', path: '/student/feedback', icon: FaRegCommentDots, color: 'from-purple-400 to-pink-500' },
+          { title: 'Apply Rebate', path: '/student/applications', icon: FaRegCalendarCheck, color: 'from-blue-400 to-indigo-500' }
         ];
       case 'caretaker':
         return [
-          { title: 'View Menu', path: '/caretaker/menu', icon: '🍽️' },
-          { title: 'Update Menu', path: '/caretaker/update-menu', icon: '📋' },
-          { title: 'Update Dates', path: '/caretaker/update-dates', icon: '📅' },
-          { title: 'Add/Remove Students', path: '/caretaker/add-remove-mess', icon: '👥' }
+          { title: 'View Menu', path: '/caretaker/menu', icon: FaUtensils, color: 'from-orange-400 to-red-500' },
+          { title: 'Update Menu', path: '/caretaker/update-menu', icon: FaClipboardList, color: 'from-green-400 to-blue-500' },
+          { title: 'Update Dates', path: '/caretaker/update-dates', icon: FaCalendarAlt, color: 'from-purple-400 to-pink-500' },
+          { title: 'Add/Remove Students', path: '/caretaker/add-remove-mess', icon: FaUsers, color: 'from-blue-400 to-indigo-500' }
         ];
       case 'warden':
         return [
-          { title: 'View Menu', path: '/warden/menu', icon: '🍽️' },
-          { title: 'View Bills', path: '/warden/bills', icon: '💰' },
-          { title: 'View Feedback', path: '/warden/feedback', icon: '📝' },
-          { title: 'Student Applications', path: '/warden/applications', icon: '📄' }
+          { title: 'View Menu', path: '/warden/menu', icon: FaUtensils, color: 'from-orange-400 to-red-500' },
+          { title: 'View Bills', path: '/warden/bills', icon: FaMoneyBillWave, color: 'from-green-400 to-blue-500' },
+          { title: 'View Feedback', path: '/warden/feedback', icon: FaRegCommentDots, color: 'from-purple-400 to-pink-500' },
+          { title: 'Student Applications', path: '/warden/applications', icon: FaFileAlt, color: 'from-blue-400 to-indigo-500' }
         ];
       case 'unregistered':
         return [
-          { title: 'View Menu', path: '/student/menu', icon: '🍽️' },
-          { title: 'View Bill', path: '/student/view-bill', icon: '💰' },
-          { title: 'Register', path: '/student/registration', icon: '📝' }
+          { title: 'View Menu', path: '/student/menu', icon: FaUtensils, color: 'from-orange-400 to-red-500' },
+          { title: 'View Bill', path: '/student/view-bill', icon: FaMoneyBillWave, color: 'from-green-400 to-blue-500' },
+          { title: 'Register', path: '/student/registration', icon: FaUserPlus, color: 'from-purple-400 to-pink-500' }
         ];
       default:
         return [];
