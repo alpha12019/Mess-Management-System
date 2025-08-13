@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaChartLine, FaUsers, FaClipboardList, FaCalendarAlt, FaMoneyBillWave, FaUtensils, FaRegCommentDots, FaFileAlt, FaUserPlus, FaUserEdit, FaUserMinus, FaRegCalendarCheck } from 'react-icons/fa';
+import { FaChartLine, FaUsers, FaClipboardList, FaCalendarAlt, FaMoneyBillWave, FaUtensils, FaRegCommentDots, FaFileAlt, FaUserPlus, FaUserEdit, FaUserMinus, FaRegCalendarCheck, FaBell, FaCog, FaSearch, FaStar, FaTrophy, FaLightbulb, FaShieldAlt, FaRocket } from 'react-icons/fa';
 
 interface DashboardProps {
   userType: 'student' | 'caretaker' | 'warden' | 'unregistered';
@@ -8,6 +8,14 @@ interface DashboardProps {
 
 const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
   const navigate = useNavigate();
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [notifications, setNotifications] = useState(3);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   // Define quick links based on user type
   const getQuickLinks = () => {
