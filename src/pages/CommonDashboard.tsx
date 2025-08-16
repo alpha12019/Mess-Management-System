@@ -176,7 +176,9 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
               <span className="text-sm font-medium text-gray-700">Secure & Reliable</span>
             </div>
             <div className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full">
-              <FaRocket className="text-blue-500" />
+              <svg className="text-blue-500 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
               <span className="text-sm font-medium text-gray-700">Fast & Efficient</span>
             </div>
           </div>
@@ -186,7 +188,9 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
       {/* Summary Section */}
       <div className="mb-12">
         <h2 className="text-2xl font-bold mb-6 text-gray-800 tracking-wide font-sans flex items-center">
-          <FaChartLine className="mr-3 text-purple-600" />
+          <svg className="mr-3 text-purple-600 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+          </svg>
           Dashboard Overview
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
