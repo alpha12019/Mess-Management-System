@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaChartLine, FaUsers, FaClipboardList, FaCalendarAlt, FaMoneyBillWave, FaUtensils, FaRegCommentDots, FaFileAlt, FaUserPlus, FaUserEdit, FaUserMinus, FaRegCalendarCheck, FaBell, FaCog, FaSearch, FaStar, FaTrophy, FaLightbulb, FaShieldAlt, FaRocket } from 'react-icons/fa';
+
 
 interface DashboardProps {
   userType: 'student' | 'caretaker' | 'warden' | 'unregistered';
@@ -22,10 +22,10 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
     switch (userType) {
       case 'student':
         return [
-          { title: 'View Menu', path: '/student/menu', icon: FaUtensils, color: 'from-orange-400 to-red-500' },
-          { title: 'View Bill', path: '/student/view-bill', icon: FaMoneyBillWave, color: 'from-green-400 to-blue-500' },
-          { title: 'Submit Feedback', path: '/student/feedback', icon: FaRegCommentDots, color: 'from-purple-400 to-pink-500' },
-          { title: 'Apply Rebate', path: '/student/applications', icon: FaRegCalendarCheck, color: 'from-blue-400 to-indigo-500' }
+          { title: 'View Menu', path: '/student/menu', icon: '🍽️', color: 'from-orange-400 to-red-500' },
+          { title: 'View Bill', path: '/student/view-bill', icon: '💰', color: 'from-green-400 to-blue-500' },
+          { title: 'Submit Feedback', path: '/student/feedback', icon: '💬', color: 'from-purple-400 to-pink-500' },
+          { title: 'Apply Rebate', path: '/student/applications', icon: '📅', color: 'from-blue-400 to-indigo-500' }
         ];
       case 'caretaker':
         return [
