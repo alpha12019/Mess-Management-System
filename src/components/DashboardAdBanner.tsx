@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaMegaphone } from 'react-icons/fa';
+import { FaVolumeUp } from 'react-icons/fa';
 
 const DashboardAdBanner: React.FC = () => {
   const [visible, setVisible] = useState(true);
@@ -9,7 +9,7 @@ const DashboardAdBanner: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 mt-2">
       <div className="relative flex items-center justify-between bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 text-white rounded-xl shadow-lg p-4 animate-fade-in">
         <div className="flex items-center space-x-4">
-          <FaMegaphone className="text-3xl drop-shadow-md" />
+          <FaVolumeUp className="text-3xl drop-shadow-md" />
           <div>
             <div className="font-bold text-lg">Special Offer!</div>
             <div className="text-base">Get <span className="font-semibold">10% off</span> on your next mess recharge. Limited time only!</div>
