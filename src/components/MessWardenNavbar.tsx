@@ -17,7 +17,7 @@ const MessWardenNavbar: React.FC = () => {
   const navIcons: Record<string, JSX.Element> = {
     'View Feedback | Statistics': <FaRegCommentDots className="mr-2" />,
     'View Menu': <FaUtensils className="mr-2" />,
-    'View Announcements': <FaBullhorn className="mr-2" />,
+    'View Announcements': <FaVolumeUp className="mr-2" />,
     'View Registrations': <FaUserFriends className="mr-2" />,
     'View Bill And Payments': <FaMoneyBillWave className="mr-2" />,
   };

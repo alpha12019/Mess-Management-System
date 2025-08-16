@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { FaVolumeUp } from 'react-icons/fa';
 
 const DashboardAdBanner: React.FC = () => {
   const [visible, setVisible] = useState(true);
