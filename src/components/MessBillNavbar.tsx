@@ -1,11 +1,15 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaMoneyBillWave, FaWallet } from 'react-icons/fa';
+
 
 const MessBillNavbar: React.FC = () => {
   const navIcons: Record<string, JSX.Element> = {
-    'View Bill': <FaMoneyBillWave className="mr-2" />,
-    'Payment History': <FaWallet className="mr-2" />,
+    'View Bill': <svg className="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+    </svg>,
+    'Payment History': <svg className="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+    </svg>,
   };
 
   return (
