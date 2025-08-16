@@ -29,23 +29,23 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
         ];
       case 'caretaker':
         return [
-          { title: 'View Menu', path: '/caretaker/menu', icon: FaUtensils, color: 'from-orange-400 to-red-500' },
-          { title: 'Update Menu', path: '/caretaker/update-menu', icon: FaClipboardList, color: 'from-green-400 to-blue-500' },
-          { title: 'Update Dates', path: '/caretaker/update-dates', icon: FaCalendarAlt, color: 'from-purple-400 to-pink-500' },
-          { title: 'Add/Remove Students', path: '/caretaker/add-remove-mess', icon: FaUsers, color: 'from-blue-400 to-indigo-500' }
+          { title: 'View Menu', path: '/caretaker/menu', icon: '🍽️', color: 'from-orange-400 to-red-500' },
+          { title: 'Update Menu', path: '/caretaker/update-menu', icon: '📋', color: 'from-green-400 to-blue-500' },
+          { title: 'Update Dates', path: '/caretaker/update-dates', icon: '📅', color: 'from-purple-400 to-pink-500' },
+          { title: 'Add/Remove Students', path: '/caretaker/add-remove-mess', icon: '👥', color: 'from-blue-400 to-indigo-500' }
         ];
       case 'warden':
         return [
-          { title: 'View Menu', path: '/warden/menu', icon: FaUtensils, color: 'from-orange-400 to-red-500' },
-          { title: 'View Bills', path: '/warden/bills', icon: FaMoneyBillWave, color: 'from-green-400 to-blue-500' },
-          { title: 'View Feedback', path: '/warden/feedback', icon: FaRegCommentDots, color: 'from-purple-400 to-pink-500' },
-          { title: 'Student Applications', path: '/warden/applications', icon: FaFileAlt, color: 'from-blue-400 to-indigo-500' }
+          { title: 'View Menu', path: '/warden/menu', icon: '🍽️', color: 'from-orange-400 to-red-500' },
+          { title: 'View Bills', path: '/warden/bills', icon: '💰', color: 'from-green-400 to-blue-500' },
+          { title: 'View Feedback', path: '/warden/feedback', icon: '💬', color: 'from-purple-400 to-pink-500' },
+          { title: 'Student Applications', path: '/warden/applications', icon: '📄', color: 'from-blue-400 to-indigo-500' }
         ];
       case 'unregistered':
         return [
-          { title: 'View Menu', path: '/student/menu', icon: FaUtensils, color: 'from-orange-400 to-red-500' },
-          { title: 'View Bill', path: '/student/view-bill', icon: FaMoneyBillWave, color: 'from-green-400 to-blue-500' },
-          { title: 'Register', path: '/student/registration', icon: FaUserPlus, color: 'from-purple-400 to-pink-500' }
+          { title: 'View Menu', path: '/student/menu', icon: '🍽️', color: 'from-orange-400 to-red-500' },
+          { title: 'View Bill', path: '/student/view-bill', icon: '💰', color: 'from-green-400 to-blue-500' },
+          { title: 'Register', path: '/student/registration', icon: '👤', color: 'from-purple-400 to-pink-500' }
         ];
       default:
         return [];
@@ -113,7 +113,9 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
       <div className="flex flex-col sm:flex-row justify-between items-center mb-8 bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/40">
         <div className="flex items-center space-x-4 mb-4 sm:mb-0">
           <div className="relative">
-            <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+            </svg>
             <input
               type="text"
               placeholder="Search dashboard..."
@@ -137,7 +139,9 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
             </div>
           </div>
           <button className="relative p-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full hover:scale-110 transition-transform duration-200">
-            <FaBell className="w-5 h-5" />
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+            </svg>
             {notifications > 0 && (
               <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
                 {notifications}
