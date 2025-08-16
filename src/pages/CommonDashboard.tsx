@@ -212,7 +212,9 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
       {/* Quick Links */}
       <div className="mb-12">
         <h2 className="text-2xl font-bold mb-6 text-gray-800 tracking-wide font-sans flex items-center">
-          <FaClipboardList className="mr-3 text-blue-600" />
+          <svg className="mr-3 text-blue-600 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+          </svg>
           Quick Actions
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -225,7 +227,7 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
               <div className={`absolute inset-0 bg-gradient-to-br ${link.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
               <div className="relative z-10 flex items-center">
                 <div className={`p-3 rounded-xl bg-gradient-to-br ${link.color} text-white mr-4 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}>
-                  <link.icon className="w-6 h-6" />
+                  <span className="text-2xl">{link.icon}</span>
                 </div>
                 <span className="text-gray-900 font-bold text-lg tracking-tight font-sans group-hover:text-purple-600 transition-colors duration-300">
                   {link.title}
@@ -239,7 +241,9 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
       {/* Recent Activity */}
       <div className="mb-12">
         <h2 className="text-2xl font-bold mb-6 text-gray-800 tracking-wide font-sans flex items-center">
-          <FaRegCalendarCheck className="mr-3 text-pink-600" />
+          <svg className="mr-3 text-pink-600 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+          </svg>
           Recent Activity
         </h2>
         <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
@@ -247,10 +251,18 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
             {[1, 2, 3].map((item) => (
               <div key={item} className="flex items-center py-4 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 rounded-lg px-3 transition-colors duration-200">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-100 via-purple-100 to-pink-100 flex items-center justify-center mr-4 animate-pulse">
-                  {userType === 'student' && <FaRegCalendarCheck className="text-blue-600 text-xl" />}
-                  {userType === 'caretaker' && <FaUtensils className="text-green-600 text-xl" />}
-                  {userType === 'warden' && <FaChartLine className="text-purple-600 text-xl" />}
-                  {userType === 'unregistered' && <FaFileAlt className="text-pink-600 text-xl" />}
+                  {userType === 'student' && <svg className="text-blue-600 text-xl w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                  </svg>}
+                  {userType === 'caretaker' && <svg className="text-green-600 text-xl w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>}
+                  {userType === 'warden' && <svg className="text-purple-600 text-xl w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+                  </svg>}
+                  {userType === 'unregistered' && <svg className="text-pink-600 text-xl w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 01-2-2V6a2 2 0 00-2-2H4z" clipRule="evenodd" />
+                  </svg>}
                 </div>
                 <div className="flex-1">
                   <p className="text-base font-semibold text-gray-900 font-sans">
@@ -271,7 +283,9 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
       {/* Achievements & Stats Section */}
       <div className="mb-12">
         <h2 className="text-2xl font-bold mb-6 text-gray-800 tracking-wide font-sans flex items-center">
-          <FaTrophy className="mr-3 text-yellow-600" />
+          <svg className="mr-3 text-yellow-600 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          </svg>
           Achievements & Insights
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -279,7 +293,9 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
           <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl shadow-xl border border-yellow-100 p-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-bold text-yellow-800">Your Progress</h3>
-              <FaStar className="text-yellow-500 text-2xl animate-pulse" />
+              <svg className="text-yellow-500 text-2xl w-8 h-8 animate-pulse" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
             </div>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
@@ -306,7 +322,9 @@ const CommonDashboard: React.FC<DashboardProps> = ({ userType }) => {
           <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl shadow-xl border border-blue-100 p-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-bold text-blue-800">Pro Tips</h3>
-              <FaLightbulb className="text-blue-500 text-2xl" />
+              <svg className="text-blue-500 text-2xl w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z" />
+              </svg>
             </div>
             <div className="space-y-3">
               <div className="flex items-start space-x-3">
