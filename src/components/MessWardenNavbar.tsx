@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { FaChartBar, FaUtensils, FaUserFriends, FaMoneyBillWave, FaRegCommentDots } from 'react-icons/fa';
+
 
 const MessWardenNavbar: React.FC = () => {
   const location = useLocation();
