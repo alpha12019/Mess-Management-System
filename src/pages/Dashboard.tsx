@@ -20,6 +20,10 @@ import {
   ArcElement 
 } from 'chart.js';
 import { Line, Bar, Doughnut } from 'react-chartjs-2';
+import DashboardAdBanner from '../components/DashboardAdBanner';
+import AnimatedStatsCard from '../components/AnimatedStatsCard';
+import AnimatedNewsTicker from '../components/AnimatedNewsTicker';
+import AnimatedOffers from '../components/AnimatedOffers';
 
 // Register ChartJS components
 ChartJS.register(
@@ -181,38 +185,41 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="space-y-6 px-2 sm:px-4 md:px-8">
+      {/* Enhanced Advertisement Banner */}
+      <DashboardAdBanner />
+      
+      {/* News Ticker */}
+      <AnimatedNewsTicker />
+      
       <div>
         <h1 className="text-xl sm:text-2xl font-bold text-dark">Mess Dashboard</h1>
         <p className="text-gray-500 text-sm sm:text-base">Welcome back, Ankit! Here's what's happening with your mess today.</p>
       </div>
       
-      {/* Stats Cards */}
+      {/* Animated Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {stats.map((stat, index) => (
-          <div key={index} className="card flex items-start p-3 sm:p-4 md:p-6 w-full">
-            <div className={`p-2 sm:p-3 rounded-lg ${stat.iconBg} ${stat.iconColor} mr-3 sm:mr-4`}>
-              <stat.icon className="w-5 h-5 sm:w-6 sm:h-6" />
-            </div>
-            <div>
-              <p className="text-gray-500 text-xs sm:text-sm">{stat.title}</p>
-              <p className="text-lg sm:text-2xl font-bold">{stat.value}</p>
-              <div className="flex items-center mt-1">
-                {stat.isPositive ? (
-                  <ArrowTrendingUpIcon className="w-4 h-4 text-green-500" />
-                ) : (
-                  <ArrowTrendingDownIcon className="w-4 h-4 text-red-500" />
-                )}
-                <span className={`text-xs sm:text-sm ml-1 ${stat.isPositive ? 'text-green-500' : 'text-red-500'}`}>{stat.change}</span>
-              </div>
-            </div>
-          </div>
+          <AnimatedStatsCard
+            key={index}
+            title={stat.title}
+            value={stat.value}
+            change={stat.change}
+            isPositive={stat.isPositive}
+            icon={stat.icon}
+            iconBg={stat.iconBg}
+            iconColor={stat.iconColor}
+            delay={index * 200} // Stagger the animations
+          />
         ))}
       </div>
+      
+      {/* Special Offers Section */}
+      <AnimatedOffers />
       
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Revenue Chart */}
-        <div className="card col-span-1 lg:col-span-2 overflow-x-auto">
+        <div className="card col-span-1 lg:col-span-2 overflow-x-auto hover:shadow-lg transition-shadow duration-300">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-2">
             <h2 className="text-base sm:text-lg font-semibold">Monthly Revenue Overview</h2>
             <select className="p-2 border rounded-lg text-xs sm:text-sm w-full sm:w-auto">
@@ -227,7 +234,7 @@ const Dashboard: React.FC = () => {
         </div>
         
         {/* Customer Distribution */}
-        <div className="card overflow-x-auto">
+        <div className="card overflow-x-auto hover:shadow-lg transition-shadow duration-300">
           <h2 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Student Distribution</h2>
           <div className="h-64 sm:h-80 flex items-center justify-center min-w-[220px]">
             <Doughnut data={customerData} options={doughnutOptions} />
@@ -236,7 +243,7 @@ const Dashboard: React.FC = () => {
       </div>
       
       {/* Orders Chart */}
-      <div className="card overflow-x-auto">
+      <div className="card overflow-x-auto hover:shadow-lg transition-shadow duration-300">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-2">
           <h2 className="text-base sm:text-lg font-semibold">Weekly Meal Distribution</h2>
           <select className="p-2 border rounded-lg text-xs sm:text-sm w-full sm:w-auto">
