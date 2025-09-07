@@ -1,7 +1,5 @@
 import React from 'react';
 import { 
-  ArrowTrendingUpIcon, 
-  ArrowTrendingDownIcon, 
   CurrencyDollarIcon, 
   UsersIcon, 
   ShoppingBagIcon,
