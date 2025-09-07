@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { IconType } from '@heroicons/react/24/outline';
 
 interface StatsCardProps {
   title: string;
   value: string;
   change: string;
   isPositive: boolean;
-  icon: IconType;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   iconBg: string;
   iconColor: string;
   delay?: number;
@@ -63,7 +62,7 @@ const AnimatedStatsCard: React.FC<StatsCardProps> = ({
       }`}
     >
       <div
-        className={`card flex items-start p-3 sm:p-4 md:p-6 w-full transition-all duration-300 cursor-pointer ${
+        className={`card relative flex items-start p-3 sm:p-4 md:p-6 w-full transition-all duration-300 cursor-pointer ${
           isHovered ? 'shadow-lg scale-105 bg-gradient-to-br from-white to-gray-50' : 'hover:shadow-md'
         }`}
         onMouseEnter={() => setIsHovered(true)}
