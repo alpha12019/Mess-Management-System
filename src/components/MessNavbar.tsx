@@ -31,6 +31,7 @@ const MessNavbar: React.FC<MessNavbarProps> = ({ isRegistered = false, userName 
 
   const navItems = isRegistered ? registeredNavItems : unregisteredNavItems;
 
+  
   // Check if the current location is within the applications section
   const isApplicationsActive = location.pathname.includes('/mess/rebate') || 
                               location.pathname.includes('/mess/special-food') ||
