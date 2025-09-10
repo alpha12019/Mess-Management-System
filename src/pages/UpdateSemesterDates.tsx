@@ -16,4 +16,3 @@ const UpdateSemesterDates: React.FC = () => {
 };
 
 export default UpdateSemesterDates; 
-export default UpdateSemesterDates; 
