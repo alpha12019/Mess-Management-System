@@ -31,7 +31,7 @@ const MessNavbar: React.FC<MessNavbarProps> = ({ isRegistered = false, userName 
 
   const navItems = isRegistered ? registeredNavItems : unregisteredNavItems;
 
-  
+
   // Check if the current location is within the applications section
   const isApplicationsActive = location.pathname.includes('/mess/rebate') || 
                               location.pathname.includes('/mess/special-food') ||
@@ -77,6 +77,7 @@ const MessNavbar: React.FC<MessNavbarProps> = ({ isRegistered = false, userName 
   };
 
   return (
+    <div className="relative z-10 animate-fade-in">
     <div className="relative z-10 animate-fade-in">
       {/* Animated Gradient Accent Bar */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 animate-gradient-x rounded-t-2xl" style={{backgroundSize:'200% 100%'}}></div>
