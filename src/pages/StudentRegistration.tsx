@@ -27,24 +27,14 @@ const StudentRegistration: React.FC = () => {
     console.log(formData);
   };
 
-  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (e.target.files && e.target.files[0]) {
-  //     setFormData(prev => ({
-  //       ...prev,
-  //       image: e.target.files![0]
-  //     }));
-  //   }
-  // };
-  const handleFileChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-  const file = target.files?.[0];
-  if (file) {
-    setFormData(prev => ({
-      ...prev,
-      image: file
-    }));
-  }
-};
-
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFormData(prev => ({
+        ...prev,
+        image: e.target.files![0]
+      }));
+    }
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
