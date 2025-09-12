@@ -43,13 +43,6 @@ const StudentRegistration: React.FC = () => {
       [name]: value
     }));
   };
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
 
   return (
     <div className="max-w-2xl mx-auto">
